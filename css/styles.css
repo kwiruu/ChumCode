@@ -1,0 +1,346 @@
+body{
+    background-color: #fff0e5;
+    margin: 0;
+}
+
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.open-sans-regular {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500px;
+    font-style: normal;
+  }
+
+  .open-sans-thin {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300px;
+    font-style: normal;
+  }
+
+  .open-sans-bold {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+.space-mono-regular {
+    font-family: "Space Mono", monospace;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .space-mono-bold {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-size: 1.3em;
+    font-style: normal;
+  }
+
+  .space-mono-thin {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-size: 1.0em;
+    font-style: normal;
+  }
+
+  header {
+    background-color: #fff0e5;
+    height: 4.5em;
+    display: flex;
+    align-items: center;
+    top: 0;
+    position: sticky;
+    transition: background-color 0.2s ease-in-out;
+    border-bottom: 0 solid black;
+    z-index: 1000;
+  }
+  
+  .scrolled {
+    background-color: white;
+    opacity: 0.98; 
+    border-width: 1px;
+  }
+  
+
+  header nav{
+    padding: 1.5em 0 1.5em 7em;
+  }
+
+  header nav a{
+    text-decoration: none;
+    font-size: 0.9em;
+    color:black;
+    margin: 1em;
+  }
+
+  .left{
+    margin-left: 45em;
+    margin-right: 2em;
+  }
+
+  .icon-button {
+    color: black;
+    border: none;
+    cursor: pointer;
+  }
+
+  .first-page-main-page{
+    display: flex;
+    height: min-content;
+    justify-content: center;
+  }
+
+  .carousel-item{
+    max-height: 600px;
+  }
+
+  .screentone{
+    position: absolute;
+    height: 720px;
+  }
+
+  .mainpage-carousel{
+    margin: 0 0 6% 0 ;
+    width: 70%;
+    height: 600px;
+  }
+  
+  .carousel-box{
+    margin-top: 2%;
+    margin-left: 10%;
+    width: 70%;
+  }
+
+  .carousel-box h1{
+    margin-top: 3% ;
+    background-color: #fff0e5;
+    font-size: 3.0em;
+  }
+  
+
+  .carousel-indicators{
+    background-color: #fff0e5;
+    border-radius: 20px;
+    padding: 0;
+    margin: auto;
+    width: 20%;
+    height: 30px;
+    border: 1px solid black;
+  }
+
+  .carousel-indicators li{
+    background-color: black;
+    padding: 0;
+    margin: auto;
+    height: 15px;
+    width: 15px;
+    border-radius: 10px;
+    border: 1px solid black;
+  }
+
+  .six-hundo{
+    height: 670px;
+  }
+  
+  .small-font{
+    font-size: 12px;
+  }
+
+  footer{
+    width: 80%;
+    margin: auto;
+  }
+
+  footer hr{
+    background-color: black;
+  }
+
+  .blue-bg{
+    background-color: #10162f;
+    height: 1020px;
+    width: 100%;
+  } 
+
+  .blue-bg-1{
+    background-color: #3a10e5;
+    height: 520px;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+  } 
+
+  .right-box{
+    max-width: 100%;
+  }
+
+  .large-box{
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-navy);
+    background-color: white;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
+    margin-left: 0.75rem;
+    border-radius: 20px;
+    box-shadow: -12px 12px black, -12px 12px 0 1px #10162f;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+
+  .large-box h2{
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: 700;
+    font-family: "Space Mono", monospace;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .badge-box{
+    width: min-content;
+    border-radius: 40px;
+    font-weight: 400;
+    white-space: nowrap;
+    color: white;
+    background-color: black;
+    font-size: 0.875rem;
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .list-number{
+    column-gap: 1rem;
+    list-style-type: none;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    flex-direction: row;
+    display: flex;
+    padding: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .zero-margin{
+    margin: 0;
+  }
+
+  .one-margin{
+    margin: 5px;
+  }
+
+  .margin-10{
+    margin: 0 100px 0 0 ;
+  }
+
+  .second-page-main-page{
+    color: white;
+    width: 75%;
+    margin: auto;
+    padding-top: 5%;
+  }
+
+  .second-page-main-page p {
+    margin: auto;
+    width: max-content;
+  }
+
+  .second-page-main-page h2 {
+    margin: auto;
+    width: max-content;
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    display: flex;
+  }
+
+  .course-box {
+    height: 100%;
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: column;
+    box-shadow: 0px 0px 0 #10162f;
+    position: relative;
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 5px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    color: black;
+    border: 1px solid black;
+  }
+  
+  .course-box:hover {
+    box-shadow: -12px 12px #00001a, -12px 12px 0 1px #10162f; /* Apply box shadow on hover */
+    transform: translate(5px, -5px);
+  }
+  
+
+  .course-box-top-box{
+    background-color: #eafdc6;
+    width: 100%;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+  }
+
+  .course-container{
+    width: 80%;
+    margin:  0 3% 0 3%;
+    height: 100%;
+  }
+
+
+  .course-container h5{
+    padding: 10px;
+    font-weight: 600;
+    padding-top: 15px;
+    padding-bottom: 0px;
+  }
+
+  .course-container span{
+    padding-left: 10px;
+    font-size: 0.8em;
+    padding-right: 10px;
+  }
+  .course-container-footer{
+    padding: 5px;
+    border-top: 1px dotted black;
+    padding-left: 10px;
+    font-size: 0.8em;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  .course-container-main-box{
+    display: flex;
+    height: 30%;
+    justify-content:space-around;
+    margin-bottom: 50px;
+  }
+
+  .explore-btn{
+    border: 1px solid black;
+    background-color:#cfae0f;
+    color: black;
+    width: max-content;
+    padding: 10px;
+    align-self: center;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: auto;
+    font-size: 0.9em;
+  }
