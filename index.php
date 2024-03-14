@@ -13,12 +13,12 @@
 
   <header>
     <nav class="open-sans-regular">
-        <a href="index.html" class="space-mono-bold">ChumCode</a>
-        <a href="catalog.html">Catalog</a>
-        <a href="resources.html">Resources</a>
-        <a href="problems.hmtl">Problems</a>
+        <a href="index.php" class="space-mono-bold">ChumCode</a>
+        <a href="">Catalog</a>
+        <a href="">Resources</a>
+        <a href="">Problems</a>
         <i class="fa-solid fa-magnifying-glass left"></i>
-        <a href="login.html" class="open-sans-bold">Log In</a>
+        <a href="login.php" class="open-sans-bold">Log In</a>
     </nav>
   </header>
   <body>

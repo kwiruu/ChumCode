@@ -1,3 +1,8 @@
+<?php    
+    include 'connect.php'; 
+    //require_once 'includes/header.php'; 
+?>
+
 <html lang="en">
   <head>
     <script src="js/styles.js" defer></script>
@@ -13,12 +18,12 @@
 
   <header>
     <nav class="open-sans-regular">
-        <a href="index.html" class="space-mono-bold">ChumCode</a>
-        <a href="catalog.html">Catalog</a>
-        <a href="resources.html">Resources</a>
-        <a href="problems.hmtl">Problems</a>
+        <a href="index.php" class="space-mono-bold">ChumCode</a>
+        <a href="">Catalog</a>
+        <a href="">Resources</a>
+        <a href="">Problems</a>
         <i class="fa-solid fa-magnifying-glass left"></i>
-        <a href="login.html" class="open-sans-bold">Log In</a>
+        <a href="login.php" class="open-sans-bold">Log In</a>
     </nav>
   </header>
   <body>
@@ -35,7 +40,7 @@
 
                 <button class="submit-button open-sans-bold" type="submit" role="button" name="btnLogin" value="Login">Log in</button>
 
-                <div class="signup-for-free">Not a member yet? <a href="register.html" class="open-sans-bold"> Sign up for free</a></div>
+                <div class="signup-for-free">Not a member yet? <a href="register.php" class="open-sans-bold"> Sign up for free</a></div>
             </form>
         </div>
     </div>
@@ -52,3 +57,37 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>
+
+<?php
+	session_start();
+	$con= mysqli_connect("localhost","root","","dbcabilif1") 
+		or die("Error in connection");
+	echo "connected";
+	if(isset($_POST['btnLogin'])){
+		$uname=$_POST['txtUname'];
+		$pwd=$_POST['txtPwd'];
+		$sql ="select * from trainee where username='".$uname."'";
+		$result = mysqli_query($con,$sql);
+		$count = mysqli_num_rows($result);
+		
+		$row = mysqli_fetch_array($result);
+		
+		if($count== 0){
+			echo "<script language='javascript'>
+						alert('username not existing.');
+				  </script>";
+		}else if($row[1] != $pwd) {
+			echo "<script language='javascript'>
+						alert('Incorrect password');
+				  </script>";
+		}else{
+			$_SESSION['username']=$row[0];
+			header("location: index.php");
+      exit;
+		}
+			
+		
+	}
+		
+
+?>
