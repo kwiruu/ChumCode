@@ -111,12 +111,9 @@ body{
   .screentone{
     position: absolute;
     height: 720px;
+    z-index: 1;
   }
 
-  .screentone1{
-    position: absolute;
-    width: 100%;
-  }
 
   .mainpage-carousel{
     margin: 0 0 6% 0 ;
@@ -178,11 +175,13 @@ body{
     background-color: #10162f;
     height: 1020px;
     width: 100%;
-    background-image: url('images/screentone1.png');
     background-size: cover;
     background-position: center;
-    margin-bottom: 50px;
   } 
+
+  .screentone1{
+    width: 100%;
+  }
 
   .blue-bg-1{
     background-color: #3a10e5;
@@ -273,6 +272,7 @@ body{
   .second-page-main-page p {
     margin: auto;
     width: max-content;
+    z-index: 1;
   }
 
   .second-page-main-page h2 {
@@ -361,6 +361,10 @@ body{
     font-size: 0.9em;
     position: relative; /* or absolute, fixed */
     z-index: 1;
+  }
+
+  .second-page-main-page p{
+    z-index: 1000;
   }
 
 
@@ -533,3 +537,4 @@ body{
   width: 40%;
   margin: auto;
 }
+
