@@ -143,7 +143,7 @@
       mysqli_query($connection,$sql1);
 			$sql ="Insert into tbluseraccount(emailadd,username,password) values('".$email."','".$uname."','".$pword."')";
 			mysqli_query($connection,$sql);
-          header("location: index.php");
+          header("location: login.php");
           exit();
 		}else{
 			echo "<script language='javascript'>

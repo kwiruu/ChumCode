@@ -42,7 +42,7 @@
 			echo "<script language='javascript'>
 						alert('username not existing.');
 				  </script>";
-		}else if($row[1] != $pwd) {
+		}else if($row[3] != $pwd) {
 			echo "<script language='javascript'>
 						alert('Incorrect password');
 				  </script>";

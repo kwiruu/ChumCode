@@ -109,9 +109,9 @@ body{
   }
 
   .screentone{
-    position: absolute;
+    position: fixed;
     height: 720px;
-    z-index: 1;
+    z-index: -1;
   }
 
 

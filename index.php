@@ -5,11 +5,11 @@
 ?>
 
   <body>
-    <img class="screentone" src="images/screentones.png" alt="screentones">
-
+    
     <div class="first-page-main-page">
-
+  
     <div class="mainpage-carousel">
+    <img class="screentone" src="images/screentones.png" alt="screentones">
       <div class="carousel-box">
         <div id="carouselExampleIndicators" class="carousel slide six-hundo" data-ride="carousel">
           <ol class="carousel-indicators">
