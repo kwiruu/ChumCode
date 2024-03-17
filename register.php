@@ -143,8 +143,9 @@
       mysqli_query($connection,$sql1);
 			$sql ="Insert into tbluseraccount(emailadd,username,password) values('".$email."','".$uname."','".$pword."')";
 			mysqli_query($connection,$sql);
-          header("location: login.php");
-          exit();
+      echo "<script language='javascript'>
+						alert('New record saved.');
+				  </script>";
 		}else{
 			echo "<script language='javascript'>
 						alert('Username already existing');
