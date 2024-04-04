@@ -193,6 +193,8 @@ body{
 
   .right-box{
     max-width: 100%;
+    ma
+    height: 600px;
   }
 
   .large-box{
@@ -492,6 +494,12 @@ body{
   width: 100%;
 }
 
+.container2 {
+  padding: 0px;
+  margin-top: 0;
+  width: 100%;
+}
+
 .container a {
   color: dodgerblue;
 }
@@ -502,12 +510,11 @@ body{
 
 .right-box1{
   width: 45%;
-  margin:auto;
 }
 
 .left-box{
   width: 45%;
-  margin: auto;
+  margin-right: 5%;
 }
 
 
@@ -541,3 +548,26 @@ body{
   /* ===================--------------------================== */
   /*                         END OF PAGE                       */
   /* ===================--------------------================== */
+
+
+  #tbluseraccount{
+    border: 1px solid black;
+  }
+
+  #tbluseraccount tr{
+    border: 1px solid black;
+  }
+
+  .thead{
+    border-bottom: 1px solid black;
+  }
+
+  .first-page-dashboard{
+    width: 80%;
+    height: auto;
+    margin: auto;
+  }
+
+  .first-page-dashboard {
+    
+  }
