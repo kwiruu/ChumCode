@@ -16,10 +16,11 @@
 <header>
   <nav class="open-sans-regular">
     <a href="index.php" class="space-mono-bold">ChumCode</a>
-    <a href="">Catalog</a>
+    <a href="catalog.php">Catalog</a>
     <a href="">Resources</a>
     <a href="">Problems</a>
     <a href="dashboard.php">Dashboard</a>
+    <a href="activity.php">Activity</a>
     <i class="fa-solid fa-magnifying-glass left"></i>
     <a href="login.php" class="open-sans-bold">Log In</a>
   </nav>

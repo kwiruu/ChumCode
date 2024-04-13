@@ -100,6 +100,8 @@ require_once 'includes/header.php';
                 <label class="label-login">Are you a</label><br>
                 <input type="radio" value="student" name="user_type" id="studentRadio"> Student<br>
                 <input type="radio" value="teacher" name="user_type" id="teacherRadio"> Teacher<br>
+                <input type="hidden" name="selected_user_type" id="selectedUserType" value="student">
+
                 <div id="studentFields" style="display: none;">
                   <label class="label-login">Grade Level</label><br>
                   <input type="number" class="textbox-form" name="gradelvl"><br>
@@ -132,13 +134,14 @@ require_once 'includes/header.php';
     document.addEventListener('DOMContentLoaded', function() {
       var studentRadio = document.getElementById('studentRadio');
       var teacherRadio = document.getElementById('teacherRadio');
-      var studentFields = document.getElementById('studentFields');
-      var teacherFields = document.getElementById('teacherFields');
+      var selectedUserType = document.getElementById('selectedUserType');
 
       studentRadio.addEventListener('change', function() {
         if (studentRadio.checked) {
           studentFields.style.display = 'block';
           teacherFields.style.display = 'none';
+          selectedUserType.value = "student";
+          
         }
       });
 
@@ -146,6 +149,7 @@ require_once 'includes/header.php';
         if (teacherRadio.checked) {
           studentFields.style.display = 'none';
           teacherFields.style.display = 'block';
+          selectedUserType.value = "teacher";
         }
       });
     });
@@ -162,7 +166,7 @@ require_once 'includes/header.php';
 </body>
 
 <?php
-require_once 'includes/footer.php';
+require_once 'includes/footer1.php';
 ?>
 
 <?php
@@ -185,7 +189,7 @@ if (isset($_POST['Register'])) {
   // for tbltudentrecord only
   $gradelvl = $_POST['gradelvl'];
 
-  $user_type = "";
+  $user_type = $_POST['user_type'];
 
   if (isset($_POST['student']) && $_POST['student'] == "student") {
     $user_type = "student";
@@ -202,7 +206,7 @@ if (isset($_POST['Register'])) {
   $row = mysqli_num_rows($result);
 
   if ($row == 0) {
-    $sql = "Insert into tbluseraccount(emailadd,username,password,user_type) values('" . $email . "','" . $uname . "','" . $pword . "', '" . $user_type . "')";
+    $sql = "Insert into tbluseraccount(emailadd,username,password,usertype) values('" . $email . "','" . $uname . "','" . $pword . "', '" . $user_type . "')";
     $sql1 = "Insert into tbluserprofile(firstname,lastname,gender,birthdate) values('" . $fname . "','" . $lname . "','" . $gender . "', '" . $birthd . "')";
     $sql12 = "Insert into tblstudentrecord(course,gradelvl) values('" . $course . "', '" . $gradelvl . "')";
     $sql13 = "Insert into tblteacherrecord(course) values('" . $course . "')";
@@ -224,3 +228,5 @@ if (isset($_POST['Register'])) {
 
 
 ?>
+register.txt
+9 KB
