@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 04:31 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Apr 13, 2024 at 04:38 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `dbcabilif1`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblactivityrecord`
+--
+
+CREATE TABLE `tblactivityrecord` (
+  `activityID` int(12) NOT NULL,
+  `activityName` varchar(16) NOT NULL,
+  `activityDescription` varchar(300) NOT NULL,
+  `dueDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblactivityrecord`
+--
+
+INSERT INTO `tblactivityrecord` (`activityID`, `activityName`, `activityDescription`, `dueDate`) VALUES
+(1, 'asdasd', 'asdasdad', '2024-05-01'),
+(2, 'Create HTML Prof', 'create a portfolio', '2024-05-18'),
+(3, 'React JS', 'make a hook folder page for you portfolio', '2024-05-11'),
+(4, 'React JS', 'make a hook folder page for you portfolio', '2024-05-11'),
+(5, 'Create Index Pag', 'index page for you profile is essential and crucial for you portfolio', '2024-05-11'),
+(6, 'Learn Java', 'asdasd', '2024-05-02'),
+(7, 'Learn Python 3', 'Learn the basics of Python 3, one of the most powerful, versatile, and in-demand programming languages today.', '2024-06-12'),
+(8, 'Learn Python 5', 'Learn the basics of Python 5, one of the most powerful, versatile, and in-demand programming languages today.', '2024-05-09');
 
 -- --------------------------------------------------------
 
@@ -115,6 +142,12 @@ INSERT INTO `tbluserprofile` (`userid`, `firstname`, `lastname`, `gender`, `birt
 --
 
 --
+-- Indexes for table `tblactivityrecord`
+--
+ALTER TABLE `tblactivityrecord`
+  ADD PRIMARY KEY (`activityID`);
+
+--
 -- Indexes for table `tblstudentrecord`
 --
 ALTER TABLE `tblstudentrecord`
@@ -143,6 +176,12 @@ ALTER TABLE `tbluserprofile`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `tblactivityrecord`
+--
+ALTER TABLE `tblactivityrecord`
+  MODIFY `activityID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tblstudentrecord`
