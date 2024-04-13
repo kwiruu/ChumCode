@@ -8,8 +8,10 @@ require_once 'includes/header.php';
     <?php
     $sql = "SELECT * FROM tbluseraccount";
     $sql2 = "SELECT * FROM tbluserprofile";
+    $sql3 = "SELECT * FROM tblactivityrecord";
     $result = mysqli_query($connection, $sql);
     $result2 = mysqli_query($connection, $sql2);
+    $result3 = mysqli_query($connection, $sql3);
     ?>
 
     <div class="first-page-dashboard">
@@ -63,6 +65,33 @@ require_once 'includes/header.php';
                         <td><?php echo $row['lastname'] ?></td>
                         <td><?php echo $row['gender'] ?></td>
                         <td><?php echo $row['birthdate'] ?></td>
+                        <td><a href="">View record</a><a href=""> Delete record</a></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+
+        <h3>tblactivityrecord</h3>
+        <table id=" tblactivityrecord" class="table">
+            <thead> 
+                <tr>
+                    <th>Seq Number</th>
+                    <th>Activity Name</th>
+                    <th>Activity Description</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                while ($row = $result3->fetch_assoc()) {
+                ?>
+                    <tr>
+                        <td><?php echo $row['activityID'] ?></td>
+                        <td><?php echo $row['activityName'] ?></td>
+                        <td><?php echo $row['activityDescription'] ?></td>
+                        <td><?php echo $row['dueDate'] ?></td>
                         <td><a href="">View record</a><a href=""> Delete record</a></td>
                     </tr>
                 <?php
