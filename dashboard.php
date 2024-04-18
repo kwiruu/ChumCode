@@ -1,7 +1,43 @@
 <?php
 include 'connect.php';
-//include 'readrecords.php';   
 require_once 'includes/header.php';
+
+if(isset($_POST['delete_user'])){
+    $id_delete_user = mysqli_real_escape_string($connection, $_POST['id_delete_user']);
+
+    $sql = "DELETE FROM tbluseraccount WHERE acctid = $id_delete_user";
+
+    if(!mysqli_query($connection, $sql)){
+        echo 'Query Error: ' . mysqli_error($connection);
+    }else{
+        echo '<script>alert("User record deleted successfully!");</script>';
+    }
+}
+
+if(isset($_POST['delete_profile'])){
+    $id_delete_profile = mysqli_real_escape_string($connection, $_POST['id_delete_profile']);
+
+    $sql = "DELETE FROM tbluserprofile WHERE userid = $id_delete_profile";
+
+    if(!mysqli_query($connection, $sql)){
+        echo 'Query Error: ' . mysqli_error($connection);
+    }else{
+        echo '<script>alert("Profile record deleted successfully!");</script>';
+    }
+}
+
+if(isset($_POST['delete_activity'])){
+    $id_delete_activity = mysqli_real_escape_string($connection, $_POST['id_delete_activity']);
+
+    $sql = "DELETE FROM tblactivityrecord WHERE activityID = $id_delete_activity";
+
+    if(!mysqli_query($connection, $sql)){
+        echo 'Query Error: ' . mysqli_error($connection);
+    }else{
+        echo '<script>alert("Activity record deleted successfully!");</script>';
+    }
+}
+
 ?>
 
 <body>
@@ -24,6 +60,7 @@ require_once 'includes/header.php';
                     <th>User Name</th>
                     <th>Password</th>
                     <th>User Type</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +73,12 @@ require_once 'includes/header.php';
                         <td><?php echo $row['username'] ?></td>
                         <td><?php echo $row['password'] ?></td>
                         <td><?php echo $row['usertype'] ?></td>
-                        <td><a href="">View record</a><a href=""> Delete record</a></td>
+                        <td>
+                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                <input type="hidden" name="id_delete_user" value="<?php echo $row['acctid']; ?>">
+                                <button type="submit" name="delete_user">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php
                 }
@@ -45,14 +87,15 @@ require_once 'includes/header.php';
         </table>
 
         <h3>tbluserprofile</h3>
-        <table id=" tbluserprofile" class="table">
-            <thead> `
+        <table id="tbluserprofile" class="table">
+            <thead>
                 <tr>
                     <th>Seq Number</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Gender</th>
                     <th>Birth Date</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,7 +108,12 @@ require_once 'includes/header.php';
                         <td><?php echo $row['lastname'] ?></td>
                         <td><?php echo $row['gender'] ?></td>
                         <td><?php echo $row['birthdate'] ?></td>
-                        <td><a href="">View record</a><a href=""> Delete record</a></td>
+                        <td>
+                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                <input type="hidden" name="id_delete_profile" value="<?php echo $row['userid']; ?>">
+                                <button type="submit" name="delete_profile">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php
                 }
@@ -74,13 +122,14 @@ require_once 'includes/header.php';
         </table>
 
         <h3>tblactivityrecord</h3>
-        <table id=" tblactivityrecord" class="table">
-            <thead> 
+        <table id="tblactivityrecord" class="table">
+            <thead>
                 <tr>
                     <th>Seq Number</th>
                     <th>Activity Name</th>
                     <th>Activity Description</th>
                     <th>Due Date</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -92,21 +141,19 @@ require_once 'includes/header.php';
                         <td><?php echo $row['activityName'] ?></td>
                         <td><?php echo $row['activityDescription'] ?></td>
                         <td><?php echo $row['dueDate'] ?></td>
-                        <td><a href="">View record</a><a href=""> Delete record</a></td>
+                        <td>
+                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                <input type="hidden" name="id_delete_activity" value="<?php echo $row['activityID']; ?>">
+                                <button type="submit" name="delete_activity">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php
                 }
                 ?>
             </tbody>
         </table>
-
-
-
     </div>
-
-
-
-
 </body>
 
 <?php
