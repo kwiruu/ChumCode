@@ -314,6 +314,36 @@ body{
     padding-bottom: 3px;
   }
 
+  .course-box-2 {
+    height: 100%;
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: column;
+    box-shadow: 0px 0px 0 #10162f;
+    position: relative;
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 5px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    color: black;
+    border: 1px solid black;
+  }
+
+  .course-box-2:hover {
+    box-shadow: -10px 10px white, -10px 10px 0 1px #10162f; /* Apply box shadow on hover */
+    transform: translate(5px, -5px);
+  }
+  
+
+  .course-box-top-box-2{
+    color: white;
+    background-color: #10162F;
+    width: 100%;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+  }
+
   .course-container{
     width: 80%;
     margin:  0 2% 0 2%;
@@ -656,4 +686,21 @@ body{
   justify-content:space-around;
   margin: auto;
   margin-bottom: 50px;
+}
+
+.profile-page-first-page{
+    width: 100%;
+}
+
+.profile-main-box{
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    border: 1px solid #00001a;
+    border-radius: 5px;
+    padding: 5%;
+}
+
+.shadow-box{
+    box-shadow: -10px 10px white, -10px 10px 0 1px #10162f;
 }

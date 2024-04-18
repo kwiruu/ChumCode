@@ -26,7 +26,6 @@
 </body>
 
 <?php
-	session_start();
 	$con= mysqli_connect("localhost","root","","dbcabilif1") 
 		or die("Error in connection");
 	if(isset($_POST['btnLogin'])){
@@ -47,7 +46,8 @@
 						alert('Incorrect password');
 				  </script>";
 		}else{
-			$_SESSION['username']=$row[0];
+			session_start();
+			$_SESSION['username']=$row[2];
 			header("location: index.php");
 			exit();
 		}

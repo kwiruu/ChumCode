@@ -22,6 +22,21 @@
     <a href="dashboard.php">Dashboard</a>
     <a href="activity.php">Activity</a>
     <i class="fa-solid fa-magnifying-glass left"></i>
-    <a href="login.php" class="open-sans-bold">Log In</a>
+    <?php
+    session_start();
+    $con = mysqli_connect("localhost", "root", "", "dbcabilif1") or die("Error in connection");
+
+    // Check if the user is logged in
+    if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+        // Display username instead of "Log In" link
+        echo '<a href="profile.php">' . $username . '</a>';
+        echo'<a href="logout.php">Logout</a>';
+    } else {
+        // Display "Log In" link
+        echo '<a href="login.php" class="open-sans-bold">Log In</a>';
+        
+    }
+?>
   </nav>
 </header>
