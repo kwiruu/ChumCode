@@ -53,7 +53,7 @@ if(isset($_POST['delete_activity'])){
     <div class="first-page-dashboard">
         <h3>tbluseraccount</h3>
         <table id="tbluseraccount" class="table">
-            <thead class="thead">
+            <thead>
                 <tr>
                     <th>Seq Number</th>
                     <th>Email Address</th>
@@ -157,5 +157,5 @@ if(isset($_POST['delete_activity'])){
 </body>
 
 <?php
-require_once 'includes/footer1.php';
+require_once 'includes/footer.php';
 ?>

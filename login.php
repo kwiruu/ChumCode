@@ -27,36 +27,42 @@
 </body>
 
 <?php
-	$con= mysqli_connect("localhost","root","","dbcabilif1") 
-		or die("Error in connection");
+	$con = mysqli_connect("localhost", "root", "", "dbcabilif1") or die("Error in connection");
+
 	if(isset($_POST['btnLogin'])){
-		$uname=$_POST['txtUname'];
-		$pwd=$_POST['txtPwd'];
-		$sql ="select * from tbluseraccount where username='".$uname."'";
-		$result = mysqli_query($con,$sql);
+		$uname = $_POST['txtUname'];
+		$pwd = $_POST['txtPwd'];
+		
+		$sql = "SELECT * FROM tbluseraccount WHERE username='" . $uname . "'";
+		$result = mysqli_query($con, $sql);
 		$count = mysqli_num_rows($result);
 		
-		$row = mysqli_fetch_array($result);
-		
-		if($count== 0){
+		if($count == 0){
 			echo "<script language='javascript'>
-						alert('username not existing.');
+						alert('Username not existing.');
 				  </script>";
-		}else if($row[3] != $pwd) {
-			echo "<script language='javascript'>
-						alert('Incorrect password');
-				  </script>";
-		}else{
-			session_start();
-			$_SESSION['username']=$row[2];
-			header("location: index.php");
-			exit();
+		} else {
+			$row = mysqli_fetch_array($result);
+			if($row['password'] != $pwd) {
+				echo "<script language='javascript'>
+							alert('Incorrect password');
+					  </script>";
+			} else {
+				$acct_id_from = $row['acctid'];
+				
+				$sql1 = "select * from tbluserprofile where acctid_fk_userprofile = '" . $acct_id_from . "'";
+				$result1 = mysqli_query($con, $sql1);
+				$row1 = mysqli_fetch_array($result1);
+				
+				session_start();
+				$_SESSION['username'] = $row['username'];
+				$_SESSION['userid'] = $row1['userid'];
+				$_SESSION['acctid'] = $row['acctid'];
+				header("location: index.php");
+				exit();
+			}
 		}
-			
-		
 	}
-		
-
 ?>
 
 <?php

@@ -88,7 +88,7 @@ body{
   }
 
   .left{
-    margin-left: 40em;
+    margin-left: 28.5em;
     margin-right: 2em;
   }
 
@@ -109,7 +109,7 @@ body{
   }
 
   .screentone{
-    position: fixed;
+    position: absolute;
     height: 720px;
     z-index: -1;
   }
@@ -589,9 +589,7 @@ body{
     border: 1px solid black;
   }
 
-  .thead{
-    border-bottom: 1px solid black;
-  }
+  
 
   .first-page-dashboard{
     width: 80%;
@@ -599,9 +597,6 @@ body{
     margin: auto;
   }
 
-  .first-page-dashboard {
-    
-  }
 
   /* ===================--------------------================== */
   /*                        CATALOG PAGE                       */
@@ -624,8 +619,6 @@ body{
     width: 50%;
   }
 
-  .left-box-act{
-  }
 
   .desBox{
     height: 20%;
@@ -689,18 +682,49 @@ body{
 }
 
 .profile-page-first-page{
-    width: 100%;
+    width: 70%;
+    padding-top: 5%;
+    margin: auto;
+    display: flex;
 }
 
 .profile-main-box{
-    width: 80%;
-    margin: auto;
-    background-color: white;
-    border: 1px solid #00001a;
+    width: 25%;
+    margin-right: auto;
     border-radius: 5px;
-    padding: 5%;
+}
+
+.profile-main-box p{
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
 }
 
 .shadow-box{
     box-shadow: -10px 10px white, -10px 10px 0 1px #10162f;
+}
+
+.table{
+  border: 1px solid #00001a;
+}
+
+thead{
+  border: 1px solid #00001a;
+  border-bottom: 1px solid #00001a;
+  border-top: 1px solid #00001a;
+}
+
+tbody td{
+  border: 1px solid #00001a;
+}
+
+.profile-right-box{
+  width: 60%;
+  margin-right: 20%;
+  height: 800px;
+}
+
+.assignment-box{
+  height: 100px;
+  margin: auto;
+  background-color: white;
 }

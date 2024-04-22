@@ -170,63 +170,53 @@ require_once 'includes/footer1.php';
 ?>
 
 <?php
-if (isset($_POST['Register'])) {
-  //retrieve data from form and save the value to a variable
-  //for tbluserprofile
-  $fname = $_POST['firstname'];
-  $lname = $_POST['lastname'];
+  if (isset($_POST['Register'])) {
+    // Retrieve data from form and save the value to a variable
+    $fname = $_POST['firstname'];
+    $lname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $uname = $_POST['username'];
+    $pword = $_POST['password'];
+    $gender = $_POST['gender'];
+    $birthd = $_POST['birthdate'];
+    $course = $_POST['course'];
+    $gradelvl = $_POST['gradelvl'];
+    $user_type = $_POST['user_type'];
 
+    if (isset($_POST['student']) && $_POST['student'] == "student") {
+      $user_type = "student";
+    } elseif (isset($_POST['teacher']) && $_POST['teacher'] == "teacher") {
+      $user_type = "teacher";
+    }
 
-  //for tbluseraccount
-  $email = $_POST['email'];
-  $uname = $_POST['username'];
-  $pword = $_POST['password'];
-  $gender = $_POST['gender'];
-  $birthd = $_POST['birthdate'];
+    $sql_check_username = "SELECT * FROM tbluseraccount WHERE username='" . $uname . "'";
+    $result_username = mysqli_query($connection, $sql_check_username);
+    $row_username = mysqli_num_rows($result_username);
 
-  // for tblteacherrecord
-  $course = $_POST['course'];
-  // for tbltudentrecord only
-  $gradelvl = $_POST['gradelvl'];
+    if ($row_username == 0) {
+      $sql_insert_account = "INSERT INTO tbluseraccount(emailadd,username,password,usertype) VALUES('" . $email . "','" . $uname . "','" . $pword . "', '" . $user_type . "')";
+      mysqli_query($connection, $sql_insert_account);
 
-  $user_type = $_POST['user_type'];
+      $acct_id = mysqli_insert_id($connection);
 
-  if (isset($_POST['student']) && $_POST['student'] == "student") {
-    $user_type = "student";
-  } elseif (isset($_POST['teacher']) && $_POST['teacher'] == "teacher") {
-    $user_type = "teacher";
+      $sql_insert_profile = "INSERT INTO tbluserprofile(acctid_fk_userprofile, firstname,lastname,gender,birthdate) VALUES('" . $acct_id . "','" . $fname . "','" . $lname . "','" . $gender . "', '" . $birthd . "')";
+      mysqli_query($connection, $sql_insert_profile);
+
+      if ($user_type == "student") {
+        $sql_insert_student_record = "INSERT INTO tblstudentrecord(acctid_fk_studentrecord, course,gradelvl) VALUES('" . $acct_id . "','" . $course . "', '" . $gradelvl . "')";
+        mysqli_query($connection, $sql_insert_student_record);
+      } elseif ($user_type == "teacher") {
+        $sql_insert_teacher_record = "INSERT INTO tblteacherrecord(acctid_fk_teacherrecord, course) VALUES('" . $acct_id . "','" . $course . "')";
+        mysqli_query($connection, $sql_insert_teacher_record);
+      }
+
+      echo "<script language='javascript'>
+            alert('New record saved.');
+          </script>";
+    } else {
+      echo "<script language='javascript'>
+            alert('Username already exists');
+          </script>";
+    }
   }
-
-  //save data to tbluserprofile			
-
-  //Check tbluseraccount if username is already existing. Save info if false. Prompt msg if true.
-
-  $sql2 = "Select * from tbluseraccount where username='" . $uname . "'";
-  $result = mysqli_query($connection, $sql2);
-  $row = mysqli_num_rows($result);
-
-  if ($row == 0) {
-    $sql = "Insert into tbluseraccount(emailadd,username,password,usertype) values('" . $email . "','" . $uname . "','" . $pword . "', '" . $user_type . "')";
-    $sql1 = "Insert into tbluserprofile(firstname,lastname,gender,birthdate) values('" . $fname . "','" . $lname . "','" . $gender . "', '" . $birthd . "')";
-    $sql12 = "Insert into tblstudentrecord(course,gradelvl) values('" . $course . "', '" . $gradelvl . "')";
-    $sql13 = "Insert into tblteacherrecord(course) values('" . $course . "')";
-
-    mysqli_query($connection, $sql);
-    mysqli_query($connection, $sql1);
-    mysqli_query($connection, $sql12);
-    mysqli_query($connection, $sql13);
-
-    echo "<script language='javascript'>
-						alert('New record saved.');
-				  </script>";
-  } else {
-    echo "<script language='javascript'>
-						alert('Username already existing');
-				  </script>";
-  }
-}
-
-
 ?>
-register.txt
-9 KB
