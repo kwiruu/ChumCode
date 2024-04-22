@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2024 at 04:38 PM
+-- Generation Time: Apr 22, 2024 at 04:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tblactivityrecord` (
-  `activityID` int(12) NOT NULL,
-  `activityName` varchar(16) NOT NULL,
+  `activityID` bigint(20) NOT NULL,
+  `activityName` varchar(32) NOT NULL,
   `activityDescription` varchar(300) NOT NULL,
   `dueDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -55,7 +55,8 @@ INSERT INTO `tblactivityrecord` (`activityID`, `activityName`, `activityDescript
 --
 
 CREATE TABLE `tblstudentrecord` (
-  `studentID` int(6) NOT NULL,
+  `studentID` bigint(20) NOT NULL,
+  `acctid_fk_studentrecord` bigint(20) NOT NULL,
   `course` enum('BSIT','BSCS','ETC') NOT NULL,
   `gradelvl` int(99) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -64,9 +65,9 @@ CREATE TABLE `tblstudentrecord` (
 -- Dumping data for table `tblstudentrecord`
 --
 
-INSERT INTO `tblstudentrecord` (`studentID`, `course`, `gradelvl`) VALUES
-(1, 'BSIT', 14),
-(2, 'BSIT', 4);
+INSERT INTO `tblstudentrecord` (`studentID`, `acctid_fk_studentrecord`, `course`, `gradelvl`) VALUES
+(4, 9, 'BSIT', 2),
+(5, 10, 'BSIT', 2);
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,8 @@ INSERT INTO `tblstudentrecord` (`studentID`, `course`, `gradelvl`) VALUES
 --
 
 CREATE TABLE `tblteacherrecord` (
-  `teacherID` int(6) NOT NULL,
+  `teacherID` bigint(20) NOT NULL,
+  `acctid_fk_teacherrecord` bigint(20) NOT NULL,
   `course` enum('BSIT','BSCS','ETC') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -83,9 +85,8 @@ CREATE TABLE `tblteacherrecord` (
 -- Dumping data for table `tblteacherrecord`
 --
 
-INSERT INTO `tblteacherrecord` (`teacherID`, `course`) VALUES
-(1, 'BSIT'),
-(2, 'BSIT');
+INSERT INTO `tblteacherrecord` (`teacherID`, `acctid_fk_teacherrecord`, `course`) VALUES
+(3, 11, 'BSIT');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,7 @@ INSERT INTO `tblteacherrecord` (`teacherID`, `course`) VALUES
 --
 
 CREATE TABLE `tbluseraccount` (
-  `acctid` bigint(20) UNSIGNED NOT NULL COMMENT 'Account Id of the user',
+  `acctid` bigint(20) NOT NULL COMMENT 'primary key, foreignkey to tbluserprofile',
   `emailadd` text NOT NULL COMMENT 'email address of the user',
   `username` varchar(50) NOT NULL COMMENT 'username',
   `password` varchar(50) NOT NULL COMMENT 'password',
@@ -106,12 +107,9 @@ CREATE TABLE `tbluseraccount` (
 --
 
 INSERT INTO `tbluseraccount` (`acctid`, `emailadd`, `username`, `password`, `usertype`) VALUES
-(13, 'keiruvent.cabili@cit.edu', 'keiru277', '01230321', 'student'),
-(14, 'kurtcabili@gmail.com', 'kurt277', '01230321', 'student'),
-(15, 'alecgiuseppe.so@cit.edu', 'alec212', '01230321', 'student'),
-(16, 'asdasdsadasd', 'asdasdad', 'asdadasd', 'student'),
-(18, 'asdasd', 'valasdadaaaotenbilatolokoten', 'asdasda', 'student'),
-(19, 'asdasd', 'valasdadaaaotenbilatolokotenasda', 'asdasd', 'student');
+(9, 'keiru277@gmail.com', 'keiru277', '01230321', 'student'),
+(10, 'kurtcabili@gmail.com', 'kurt277', '01230321', 'student'),
+(11, 'keiru277@gmail.com', 'keiru277377', '01230321', 'teacher');
 
 -- --------------------------------------------------------
 
@@ -121,6 +119,7 @@ INSERT INTO `tbluseraccount` (`acctid`, `emailadd`, `username`, `password`, `use
 
 CREATE TABLE `tbluserprofile` (
   `userid` bigint(20) UNSIGNED NOT NULL COMMENT 'UserID of the User',
+  `acctid_fk_userprofile` bigint(20) NOT NULL,
   `firstname` varchar(50) NOT NULL COMMENT 'First name of the user',
   `lastname` varchar(50) NOT NULL COMMENT 'Last name of the user',
   `gender` varchar(25) NOT NULL COMMENT 'Gender of the user',
@@ -131,11 +130,10 @@ CREATE TABLE `tbluserprofile` (
 -- Dumping data for table `tbluserprofile`
 --
 
-INSERT INTO `tbluserprofile` (`userid`, `firstname`, `lastname`, `gender`, `birthdate`) VALUES
-(15, 'Keiru', 'Cabili', 'male', '2004-06-03'),
-(16, 'Kurt', 'Cabili', 'male', '2006-01-12'),
-(17, 'Alec Giuseppe', 'So', 'male', '2000-07-06'),
-(21, 'asdasdasd', 'asdasd', 'female', '2024-04-04');
+INSERT INTO `tbluserprofile` (`userid`, `acctid_fk_userprofile`, `firstname`, `lastname`, `gender`, `birthdate`) VALUES
+(27, 9, 'Keiru Vent', 'Cabili', 'male', '2004-06-03'),
+(28, 10, 'Kurt', 'Cabili', 'male', '2024-03-31'),
+(29, 11, 'Keiru Vent', 'Cabili', 'female', '2024-04-22');
 
 --
 -- Indexes for dumped tables
@@ -151,27 +149,30 @@ ALTER TABLE `tblactivityrecord`
 -- Indexes for table `tblstudentrecord`
 --
 ALTER TABLE `tblstudentrecord`
-  ADD PRIMARY KEY (`studentID`);
+  ADD PRIMARY KEY (`studentID`),
+  ADD KEY `acctid_fk_studentrecord` (`acctid_fk_studentrecord`);
 
 --
 -- Indexes for table `tblteacherrecord`
 --
 ALTER TABLE `tblteacherrecord`
-  ADD PRIMARY KEY (`teacherID`);
+  ADD PRIMARY KEY (`teacherID`),
+  ADD KEY `acctid_fk_teacherrecord` (`acctid_fk_teacherrecord`);
 
 --
 -- Indexes for table `tbluseraccount`
 --
 ALTER TABLE `tbluseraccount`
   ADD PRIMARY KEY (`acctid`),
-  ADD UNIQUE KEY `acctid` (`acctid`);
+  ADD KEY `acctid_fk` (`acctid`);
 
 --
 -- Indexes for table `tbluserprofile`
 --
 ALTER TABLE `tbluserprofile`
   ADD PRIMARY KEY (`userid`),
-  ADD UNIQUE KEY `userid` (`userid`);
+  ADD UNIQUE KEY `userid` (`userid`),
+  ADD KEY `acctid_fk` (`acctid_fk_userprofile`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -181,31 +182,53 @@ ALTER TABLE `tbluserprofile`
 -- AUTO_INCREMENT for table `tblactivityrecord`
 --
 ALTER TABLE `tblactivityrecord`
-  MODIFY `activityID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `activityID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tblstudentrecord`
 --
 ALTER TABLE `tblstudentrecord`
-  MODIFY `studentID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `studentID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblteacherrecord`
 --
 ALTER TABLE `tblteacherrecord`
-  MODIFY `teacherID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `teacherID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbluseraccount`
 --
 ALTER TABLE `tbluseraccount`
-  MODIFY `acctid` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Account Id of the user', AUTO_INCREMENT=20;
+  MODIFY `acctid` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'primary key, foreignkey to tbluserprofile', AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbluserprofile`
 --
 ALTER TABLE `tbluserprofile`
-  MODIFY `userid` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'UserID of the User', AUTO_INCREMENT=25;
+  MODIFY `userid` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'UserID of the User', AUTO_INCREMENT=30;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tblstudentrecord`
+--
+ALTER TABLE `tblstudentrecord`
+  ADD CONSTRAINT `acctid_fk_studentrecord` FOREIGN KEY (`acctid_fk_studentrecord`) REFERENCES `tbluseraccount` (`acctid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tblteacherrecord`
+--
+ALTER TABLE `tblteacherrecord`
+  ADD CONSTRAINT `acctid_fk_teacherrecord` FOREIGN KEY (`acctid_fk_teacherrecord`) REFERENCES `tbluseraccount` (`acctid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbluserprofile`
+--
+ALTER TABLE `tbluserprofile`
+  ADD CONSTRAINT `acctid_fk` FOREIGN KEY (`acctid_fk_userprofile`) REFERENCES `tbluseraccount` (`acctid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
