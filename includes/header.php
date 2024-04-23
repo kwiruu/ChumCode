@@ -14,29 +14,43 @@
 </head>
 
 <header>
-  <nav class="open-sans-regular">
-    <a href="index.php" class="space-mono-bold">ChumCode</a>
-    <a href="catalog.php">Catalog</a>
-    <a href="">Resources</a>
-    <a href="">Problems</a>
-    <a href="dashboard.php">Dashboard</a>
-    <a href="activity.php">Activity</a>
-    <i class="fa-solid fa-magnifying-glass left"></i>
-    <?php
-    session_start();
-    $con = mysqli_connect("localhost", "root", "", "dbcabilif1") or die("Error in connection");
+  <nav class="open-sans-regular navbox">
+    <div>
+      <a href="index.php" class="space-mono-bold">ChumCode</a>
+      <?php
+        session_start();
+        if (isset($_SESSION['username'])) {
+            echo'<a href="myhome.php">My Home</a>';
+        }
+      ?>
+      <a href="catalog.php">Catalog</a>
+      <a href="">Resources</a>
+      <a href="">Problems</a>
+      <a href="dashboard.php">Dashboard</a>
+      <?php
+        if (isset($_SESSION['username'])) {
+            echo' <a href="activity.php">Activity</a>
+                  <a href="assignactivity.php">Assign Activity</a>';
+        }
+      ?>
+    </div>  
+    <div style="padding-top:10px">
+      <i class="fa-solid fa-magnifying-glass left"></i>
+      <?php
+        $con = mysqli_connect("localhost", "root", "", "dbcabilif1") or die("Error in connection");
 
-    // Check if the user is logged in
-    if (isset($_SESSION['username'])) {
-        $username = $_SESSION['username'];
-        // Display username instead of "Log In" link
-        echo '<a href="profile.php">' . $username . '</a>';
-        echo'<a href="logout.php">Logout</a>';
-    } else {
-        // Display "Log In" link
-        echo '<a href="login.php" class="open-sans-bold">Log In</a>';
-        
-    }
-?>
+        // Check if the user is logged in
+        if (isset($_SESSION['username'])) {
+            $username = $_SESSION['username'];
+            // Display username instead of "Log In" link
+            echo '<a href="profile.php">' . $username . '</a>';
+            echo'<a href="logout.php">Logout</a>';
+        } else {
+            // Display "Log In" link
+            echo '<a href="login.php" class="open-sans-bold">Log In</a>';
+            
+        }
+      ?>
+  </div>
   </nav>
 </header>

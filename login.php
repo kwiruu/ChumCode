@@ -58,7 +58,7 @@
 				$_SESSION['username'] = $row['username'];
 				$_SESSION['userid'] = $row1['userid'];
 				$_SESSION['acctid'] = $row['acctid'];
-				header("location: index.php");
+				header("location: myhome.php");
 				exit();
 			}
 		}

@@ -78,17 +78,24 @@ body{
 
   header nav{
     padding: 1.5em 0 1.5em 7em;
+    width: 90%;
   }
 
   header nav a{
     text-decoration: none;
     font-size: 0.9em;
     color:black;
-    margin: 1em;
+    margin:auto;
+    padding: 15px;
+  }
+
+  .navbox{
+    display: flex;
+    justify-content: space-between;
   }
 
   .left{
-    margin-left: 28.5em;
+    margin-left: auto;
     margin-right: 2em;
   }
 
@@ -267,7 +274,7 @@ body{
     color: white;
     width: 65%;
     margin: auto;
-    padding-top: 5%;
+    padding-top: 2%;
   }
 
 
@@ -617,6 +624,7 @@ body{
   .insert-act-box{
     margin: auto;
     width: 50%;
+    margin-bottom: 10%;
   }
 
 

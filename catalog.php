@@ -3,7 +3,6 @@
     //include 'readrecords.php';   
     require_once 'includes/header.php'; 
 ?>
-
   <body>
     <div>
       <div class="second-page-main-page">
