@@ -18,11 +18,13 @@
                 <div id="coursePage" class="page">
                     Course Page Content
                 </div>
-                <div id="activitiesPage" class="page">
+
+                <div id="activitiesPage" class="page" style="display: none;">
                     Activities Page Content
                 </div>
+
                 <div id="assignActivitiesPage" class="page" style="display: none;">
-                <div class="whitebg">
+                    <div class="whitebg">
                          <?php
                         $sql = "SELECT * FROM tblactivityrecord";
                         $result = mysqli_query($connection, $sql);
@@ -62,7 +64,26 @@
                 </div>
 
                 <div id="workspacesPage" class="page" style="display: none;">
-                    Workspaces Page Content
+                    <h4 style="font-weight:700;">My Workspaces</h4>
+                    <div class="header-box-tab">
+                        <button class="tab-button">main.c</button>
+                        <button class="run-button" id="showTextareaButton">Run</button>
+                    </div>
+                    <div class="compiler-box">
+                        <div style="display:flex; flex-direction: column; width:2%; text-align: center; background-color: #f1f1f3;"><p>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16</p>
+                        </div>
+                    <textarea type="text" class="compiler-textbox">// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("HelloWorld");
+    }
+}</textarea>
+
+<textarea id="myTextarea" type="text" class="compiler-textbox" style="display:none; border-right:none;">HelloWorld</textarea>
+                    </div>
+
                 </div>
             </div>
         </div>
