@@ -29,8 +29,7 @@
       <a href="dashboard.php">Dashboard</a>
       <?php
         if (isset($_SESSION['username'])) {
-            echo' <a href="activity.php">Activity</a>
-                  <a href="assignactivity.php">Assign Activity</a>';
+            echo' <a href="activity.php">Activity</a>';
         }
       ?>
     </div>  
