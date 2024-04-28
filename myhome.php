@@ -24,6 +24,7 @@
                 <div id="coursePage" class="page">
                     <div>
                     <h4>Courses</h4>
+                    <hr style="border-width: 1px; border-color: black;">
                     <!--show add button if teacher ang user -->
                     <?php if ($userType == "teacher") { ?>
                         <button type="button" class="addcourse-button" onclick="openAddActivityPopup()"> Add Activity <i class="fa-solid fa-plus"></i></button><br>
@@ -70,7 +71,7 @@
                                 }
                             } else {
                             ?>
-                            <div class ="empty-box" style="color: gray;">No Course Available</div>
+                            <div class ="empty-box" style="color: gray;"><i class="fa-solid fa-ban" style="margin-top:35%; margin-bottom:15%; font-size:90px"></i><p>No Course Available</p></div>
                             <?php
                             }
                             ?>

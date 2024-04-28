@@ -170,8 +170,8 @@ body{
   }
 
   footer{
-    width: 80%;
-    margin: auto;
+    border-top:1px solid black;
+    width: 100%;
   }
 
   footer hr{
@@ -744,7 +744,8 @@ tbody td{
 
   .first-page-myhome{
     width: 100%;
-    height:800px
+    height:max-content;
+    margin-bottom: 100px;
   }
 
   .dashboard-holder{
@@ -753,12 +754,16 @@ tbody td{
     display: flex;
     justify-content: space-between;
     margin-top: 2%;
+    height: 100%;
   }
 
   .dashboard-left-panel{
     width: 22%;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: 80px;
+    height: 100%;
   }
 
   .toggle-button{
@@ -949,17 +954,146 @@ margin-bottom: 10px;
 }
 
 .empty-box {
-width: 200px; 
-height: 200px;
+width: 250px; 
+height: 300px;
 border: 3px dashed #ccc;
 margin: 20px;
 padding: 20px;
 text-align: center;
-line-height: 180px; 
 font-weight: bold;
 font-size: 16px;
 color:#4c4c55;
-margin-top: 80px;
+margin-top: 8%;
 margin-bottom: 50px;
+padding-top: 0px;
+display: flex;
+flex-direction: column;
 }
 
+.empty-box p{
+  margin-top: 0px;
+  height: 0px;
+  padding-top: 0px;
+}
+
+
+  /* ===================--------------------================== */
+  /*                          FOOTER PHP                       */
+  /* ===================--------------------================== */
+
+
+.footer-box{
+  height:600px;
+  width: 80%;
+  margin: auto;
+  display:flex;
+  justify-content: space-between;
+  padding: 3% 0%;
+}
+
+.footer-box i{
+  margin:10% 1%;
+  font-size: 20px;
+}
+
+.left-footer-box{
+  height: 100%;
+  width: 49%;
+  display:flex;
+  justify-content: space-between;
+}
+
+.left-footer-box-1{
+  height: 100%;
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-footer-box-1 p{
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 3%;
+}
+
+.left-footer-box-1 h6{
+  font-weight: 700;
+  margin-bottom: 10%;
+}
+
+.horiline{
+  width: 1px;
+  border-left: 1px solid black;
+}
+
+.right-footer-box{
+  height: 100%;
+  width: 49%;
+  display:flex;
+  padding-left: 5%;
+  justify-content: space-between;
+}
+
+.right-footer-box-1{
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-footer-box-0{
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 5%;
+}
+
+.right-footer-box-2{
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-footer-box-0 p{
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 3%;
+}
+
+.right-footer-box-0 h6{
+  font-weight: 700;
+  margin-bottom: 10%;
+}
+
+.right-footer-box-1 p{
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 3%;
+}
+
+.right-footer-box-1 h6{
+  font-weight: 700;
+  margin-bottom: 10%;
+}
+
+.right-footer-box-2 p{
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 3%;
+}
+
+.right-footer-box-2 h6{
+  font-weight: 700;
+  margin-bottom: 10%;
+}
+
+.policy-footer{
+  width: 80%;
+  margin: auto;
+}
+
+.go-bottom{
+  margin-top: 300px;
+}

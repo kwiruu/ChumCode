@@ -16,7 +16,7 @@
 <header>
   <nav class="open-sans-regular navbox">
     <div>
-      <a href="index.php" class="space-mono-bold">ChumCode</a>
+      <a href="index.php" class="space-mono-bold">ChumCode<i class="fa-solid fa-code" style="font-size:15px;margin-left:5px;"></i></a>
       <?php
         session_start();
         if (isset($_SESSION['username'])) {
