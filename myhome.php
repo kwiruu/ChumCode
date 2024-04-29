@@ -23,12 +23,15 @@
             <div class="dashboard-right-panel">
                 <div id="coursePage" class="page">
                     <div>
-                    <h4>Courses</h4>
+                        <div style="display:flex; justify-content:space-between; width:100%;">
+                            <h4>Courses</h4>
+                            <?php if ($userType == "teacher") { ?>
+                        <button type="button" class="addCourse-button" onclick="openAddActivityPopup()"> Add Activity <i class="fa-solid fa-plus"></i></button><br>
+                    <?php } ?>
+                        </div>  
                     <hr style="border-width: 1px; border-color: black;">
                     <!--show add button if teacher ang user -->
-                    <?php if ($userType == "teacher") { ?>
-                        <button type="button" class="addcourse-button" onclick="openAddActivityPopup()"> Add Activity <i class="fa-solid fa-plus"></i></button><br>
-                    <?php } ?>
+                    
                     <div id="addActivityModal" class="modal">
                         <div class="modal-content">
                             <div class="box-for-close"><button class="close" onclick="closeAddActivityPopup()">&times;</button></div>
@@ -55,26 +58,63 @@
                             
                             $result = mysqli_query($connection, $sql);
                         ?>
-                        <?php
-                            if(mysqli_num_rows($result) > 0) {
-                                while ($row = $result->fetch_assoc()) {
+                        <?php   
+                        if(mysqli_num_rows($result) > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $courseID = $row['courseID']; // Assuming you have a unique identifier for each course
                         ?>
-                        <div class="course-container-act">
-                            <div class="course-box-2">
-                            <div class="course-box-top-box-2 space-mono-thin"><?php echo $row['courseName'] ?></div>
-                            <h5 class="open-sans-regular"><?php echo $row['courseName'] ?></h3>
-                                <span class="open-sans-regular"><?php echo $row['courseDescription'] ?></span>
-                                <div class="course-container-footer open-sans-bold"><u>view course</u></div>
+                        <div class="course-drop-down-container" style="margin-bottom:2%">
+                            <div class="drop-down-box">
+                                <div>
+                                    <div class="course-drop-down">
+                                        <div class="course-drop-down-left">
+                                            <div style="padding:3% 3%; height:100px">
+                                                <p class="space-mono-thin" style="color: black; margin-bottom:5px"><?php echo $row['courseName'] ?></p>
+                                                <h2 class="open-sans-bold" style="color: black; font-size:22px"><?php echo $row['courseDescription'] ?></h2>
+                                            </div>
+                                        </div>
+                                        <div class="course-drop-down-right">
+                                            <button class="toggleButton-drop-down" data-course-id="<?php echo $courseID; ?>"><i class="fa-solid fa-chevron-down"></i></button>
+                                        </div>
+                                    </div>
+                                    <div id="contentz<?php echo $courseID; ?>" class="contentz hidden-drop-down">
+                                    <div class="activity-box">
+                                        <div><h6 style="font-weight:700;" class="space-mono-thin">Course</h6></div>
+                                        <!-- Content associated with each course -->
+                                        <?php
+                                        $sqlz = "SELECT * FROM tblactivityrecord";
+                                        $resultz = mysqli_query($connection, $sqlz);
+                                        ?>
+                                        <?php
+                                        while ($rowzz = $resultz->fetch_assoc()) {
+                                        ?>
+                                                <div class="activity-hover" style="display:flex; margin:1% 2%; padding:1%;font-size:14px">
+                                                    <div style="margin:0%;font-weight:500;width:15%" >
+                                                        Activity
+                                                    </div>
+                                                    <div style="width:85%; font-weight:400" class="limited-characters">
+                                                    <?php echo $rowzz['activityName'] ?>
+                                                    </div>
+                                                </div>
+                                        <?php
+                                        }
+                                        ?>
+                                        
+                                        </div>
+                                    </div>
+                                </div>    
                             </div>
                         </div>
-                            <?php
-                                }
-                            } else {
-                            ?>
-                            <div class ="empty-box" style="color: gray;"><i class="fa-solid fa-ban" style="margin-top:35%; margin-bottom:15%; font-size:90px"></i><p>No Course Available</p></div>
-                            <?php
+                        <?php
                             }
-                            ?>
+                        } else {
+                        ?>
+<div class="empty-box" style="color: gray;"><i class="fa-solid fa-ban" style="margin-top:35%; margin-bottom:15%; font-size:90px"></i><p>No Course Available</p></div>
+<?php
+}
+?>
+
+
                     </div>
                     <div id="specialCoursesSection">
                         <h4>Special Courses You can Enroll</h4>

@@ -681,7 +681,7 @@ body{
 .course-container-main-box-act{
   display: flex;
   flex-wrap: wrap;
-  width: 90%;
+  width: 100%;
   justify-content:space-around;
   margin: auto;
   margin-bottom: 50px;
@@ -892,8 +892,7 @@ tbody td{
 
 
 .addcourse-button {
-  float: right;
-  margin-bottom: 10px;
+
 }
 
 .modal {
@@ -939,9 +938,17 @@ cursor: pointer;
 
 
 .addCourse-button{
-margin-top: 30px;
-float:right;
+  background-color: #fff0e5;
+  color: #3a10e5;
+  font-weight: 600;
+  outline:none;
+  border: none;
+  margin-left: 70%;
+}
 
+.addCourse-button:focus{
+  border:0px;
+  outline:none;
 }
 
 
@@ -1096,4 +1103,84 @@ flex-direction: column;
 
 .go-bottom{
   margin-top: 300px;
+}
+
+.course-drop-down-container{
+  width: 100%;
+}
+
+.course-drop-down{
+  width: 100%;  
+  display: flex;
+  justify-content: space-between;
+}
+
+.course-drop-down-left{
+  width: 100%;
+}
+
+.course-drop-down-right{
+  width: 10%;
+  height: 100px;
+  padding:5% 7%;
+}
+
+.toggleButton-drop-down{
+  border: none;
+  background-color: white;
+}
+
+.toggleButton-drop-down:focus{
+  outline: none;
+}
+
+.drop-down-box{
+  background-color: white;
+  border: 1px solid black;
+}
+
+.hidden-drop-down {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear; /* Add transition for smoother effect */
+}
+
+.hidden-drop-down.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+@keyframes twist {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+.rotate {
+  animation: twist 0.5s ease-in-out forwards; /* Apply the twist animation */
+}
+
+.activity-box{
+  border:1px solid #d6d6d6;
+  margin:2% 3%;
+  padding:3%;
+  background-color: white;
+}
+
+.limited-characters {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%; /* Adjust the max-width as needed */
+}
+
+.activity-hover:hover{
+  background-color: #f1f1f3;
 }
