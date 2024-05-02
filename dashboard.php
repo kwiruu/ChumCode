@@ -45,9 +45,12 @@ if(isset($_POST['delete_activity'])){
     $sql = "SELECT * FROM tbluseraccount";
     $sql2 = "SELECT * FROM tbluserprofile";
     $sql3 = "SELECT * FROM tblactivityrecord";
+    $sql4 = "SELECT * FROM tblcourse";
     $result = mysqli_query($connection, $sql);
     $result2 = mysqli_query($connection, $sql2);
     $result3 = mysqli_query($connection, $sql3);
+    $result4 = mysqli_query($connection, $sql4);
+
     ?>
 
     <div class="first-page-dashboard">
@@ -144,6 +147,36 @@ if(isset($_POST['delete_activity'])){
                         <td>
                             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <input type="hidden" name="id_delete_activity" value="<?php echo $row['activityID']; ?>">
+                                <button type="submit" name="delete_activity">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+
+        <h3>tblcourse</h3>
+        <table id="tblactivityrecord" class="table">
+            <thead>
+                <tr>
+                    <th>Seq Number</th>
+                    <th>Course Name</th>
+                    <th>Course Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                while ($row = $result4->fetch_assoc()) {
+                ?>
+                    <tr>
+                        <td><?php echo $row['courseID'] ?></td>
+                        <td><?php echo $row['courseName'] ?></td>
+                        <td><?php echo $row['courseDescription'] ?></td>
+                        <td>
+                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                <input type="hidden" name="id_delete_activity" value="<?php echo $row['courseID']; ?>">
                                 <button type="submit" name="delete_activity">Delete</button>
                             </form>
                         </td>

@@ -692,11 +692,12 @@ body{
     padding-top: 5%;
     margin: auto;
     display: flex;
+    flex-direction: column;
 }
 
 .profile-main-box{
     width: 25%;
-    margin-right: auto;
+    margin-right: 5%;
     border-radius: 5px;
 }
 
@@ -778,6 +779,10 @@ tbody td{
     transition: background-color 0.5s ease;
   }
 
+  .toggle-button:focus{
+    outline: none;
+  }
+
   .toggle-button:hover{
     color:#3a10e5;
   }
@@ -843,9 +848,24 @@ tbody td{
     padding: 1%;
     background-color: #fff0e5;
     border: 0px;
+    width: 10%;
+    font-weight: 600;
+    height:60px;
+    margin-bottom: 0px;
+  }
+
+  .tab-button:focus{
+    outline:none;
+  }
+
+  .tab-button.active{
+    padding: 1%;
+    background-color: #fff0e5;
+    border: 0px;
     border-bottom: 3px solid #3a10e5;
     width: 10%;
     font-weight: 600;
+    box-shadow: none;
   }
 
   .compiler-box{
