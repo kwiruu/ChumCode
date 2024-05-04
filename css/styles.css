@@ -687,24 +687,9 @@ body{
   margin-bottom: 50px;
 }
 
-.profile-page-first-page{
-    width: 70%;
-    padding-top: 5%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-}
 
-.profile-main-box{
-    width: 25%;
-    margin-right: 5%;
-    border-radius: 5px;
-}
 
-.profile-main-box p{
-  font-weight: 400;
-  font-family: "Open Sans", sans-serif;
-}
+
 
 .shadow-box{
     box-shadow: -10px 10px white, -10px 10px 0 1px #10162f;
@@ -1203,4 +1188,137 @@ flex-direction: column;
 
 .activity-hover:hover{
   background-color: #f1f1f3;
+}
+
+.profile-page-first-page{
+  border-radius: 20px;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.profile-page-first-page-container{
+  width: 90%;
+  margin: 5%;
+  margin-top: 0px;
+}
+
+.profile-page-buttons{
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  padding-left: 5px;
+  border-radius: 5px;
+}
+
+.profile-main-box{
+  width: 68%;
+  margin-right: 5%;
+  border-radius: 5px;
+  border: 1px solid black;;
+}
+
+.profile-main-box p{
+font-weight: 400;
+font-family: "Open Sans", sans-serif;
+}
+
+.name-box{
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid black;
+  padding-left: 3%;
+  padding-top: 12px;
+  display: flex;
+}
+
+.profile-pic-box{
+  padding: 3%;
+  border-bottom: 1px solid black;
+}
+
+.profile-pic-box img{
+  width: 100px;
+  border-radius: 50%;
+}
+
+.profile-pic-box button{
+  border-radius: 25px;
+  width: 50%;
+  height: 40px;
+  margin: auto 0;
+  border: none;
+  font-size: 14px;
+  color:black;
+}
+
+.profile-pic-box.active button{
+  border-radius: 5px;
+  width: 50%;
+  height: 40px;
+  margin: auto 0;
+  background-color: #3a10e5;
+  border: none;
+  font-size: 14px;
+  color:white;
+}
+
+.profile-pic-box button:focus{
+  outline: none;
+}
+
+.username-box{
+  padding: 3%;
+  border-bottom: 1px solid black;
+}
+
+.username-box-container{
+  border: 1px solid black;
+  background-color: #f6f6f6;
+  width: 72%;
+  border-radius: 5px;
+  padding: 1.5%;
+  margin-left: 0px;
+  padding-left: 2%;
+}
+
+.username-box-container2{
+  border: 2px solid black;
+  background-color: #ffffff;
+  width: 72%;
+  height:40px;
+  border-radius: 5px;
+  padding: 1.5%;
+  margin-left: 0px;
+  padding-left: 2%;
+}
+
+.personal-info-box{
+  padding: 3%;
+  border-bottom: 1px solid black;
+}
+
+.usertype-box{
+  padding: 3%;
+}
+.usertype-box2{
+  padding: 3%;
+  border-bottom: 1px solid black;
+}
+
+.submit-button-profile{
+  border-radius: 5px;
+  height: 40px;
+  background-color: #3a10e5;
+  border: none;
+  font-size: 14px;
+  color:white;
+}
+
+.submit-box{
+  width: 100%;
+  padding: 3%;
 }
