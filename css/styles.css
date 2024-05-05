@@ -1316,9 +1316,44 @@ font-family: "Open Sans", sans-serif;
   border: none;
   font-size: 14px;
   color:white;
+  width: 20%;
+  margin: auto;
 }
 
 .submit-box{
   width: 100%;
   padding: 3%;
 }
+
+
+  /* ===================--------------------================== */
+  /*                          Activies Page                    */
+  /* ===================--------------------================== */
+
+
+  .activitiesPage-box{
+      width: 100%;
+  }
+
+  .tab-button-act{
+    padding: 1%;
+    background-color: #fff0e5;
+    border: 0px;
+    width: max-content;
+    font-weight: 600;
+    margin-bottom: 0px;
+  }
+
+  .tab-button-act:focus{
+    outline:none;
+  }
+
+  .tab-button-act.active{
+    padding: 1%;
+    background-color: #fff0e5;
+    border: 0px;
+    border-bottom: 3px solid #3a10e5;
+    font-weight: 600;
+    box-shadow: none;
+    margin-bottom: 0px;
+  }

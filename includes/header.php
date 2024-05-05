@@ -27,6 +27,7 @@
       <a href="">Resources</a>
       <a href="">Problems</a>
       <a href="dashboard.php">Dashboard</a>
+      <a href="reports.php">Reports</a>
       <?php
         if (isset($_SESSION['username'])) {
             echo' <a href="activity.php">Activity</a>';

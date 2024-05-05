@@ -59,3 +59,37 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Get references to buttons and pages
+  const inProgressButton = document.querySelector(".tab-button-act:nth-child(1)");
+  const completedButton = document.querySelector(".tab-button-act:nth-child(2)");
+  const page1 = document.querySelector(".page1");
+  const page2 = document.querySelector(".page2");
+  
+  // Function to toggle active state of buttons
+  function toggleButton(button) {
+      const buttons = document.querySelectorAll('.tab-button-act');
+      buttons.forEach(btn => {
+          btn.classList.remove('active');
+      });
+      button.classList.add('active');
+  }
+  
+  // Add click event listeners to buttons
+  inProgressButton.addEventListener("click", function() {
+      // Display page 1 and hide page 2
+      page1.style.display = "block";
+      page2.style.display = "none";
+      toggleButton(this);
+  });
+  
+  completedButton.addEventListener("click", function() {
+      // Display page 2 and hide page 1
+      page1.style.display = "none";
+      page2.style.display = "block";
+      toggleButton(this);
+  });
+});
+

@@ -17,7 +17,9 @@
             <div class="dashboard-left-panel">
                 <button id="courseButton" class="toggle-button active"><i class="fa-regular fa-bookmark" style="margin-right:5%;"></i> Course</button>
                 <button id="activitiesButton" class="toggle-button"><i class="fa-regular fa-folder-open" style="margin-right:5%;"></i> Activities</button>
+                <?php if ($userType == "teacher") { ?>
                 <button id="assignactivitiesButton" class="toggle-button"><i class="fa-regular fa-pen-to-square" style="margin-right:5%;"></i> Assign Activities</button>
+                <?php } ?>                
                 <button id="workspacesButton" class="toggle-button"><i class="fa-solid fa-code" style="margin-right:5%;"></i> Workspaces</button>
             </div>
             <div class="dashboard-right-panel">
@@ -51,7 +53,7 @@
                     <div class="course-container-main-box-act">
                         <?php
                             if($userType == "teacher"){
-                                $sql = "SELECT * FROM tblcourse WHERE courseID IN (SELECT courseID FROM tblcourseteacher WHERE teacherID = (SELECT teacherID FROM tblteacherrecord WHERE acctid_fk_teacherrecord = $userId))";
+                                $sql = "SELECT * FROM tblcourse WHERE courseID IN (SELECT courseID FROM tblcourseteacher WHERE fk_teacherID = (SELECT teacherID FROM tblteacherrecord WHERE acctid_fk_teacherrecord = $userId))";
                             } else if($userType == "student"){
                                 $sql = "SELECT * FROM tblcourse WHERE courseID IN (SELECT courseID FROM tblcourseStudent WHERE studentID = (SELECT studentID FROM tblstudentrecord WHERE acctid_fk_studentrecord = $userId))";
                             }
@@ -82,7 +84,7 @@
                                         <div><h6 style="font-weight:700;" class="space-mono-thin">Course</h6></div>
                                         <!-- Content associated with each course -->
                                         <?php
-                                        $sqlz = "SELECT * FROM tblactivityrecord";
+                                        $sqlz = "SELECT * FROM tblactivityrecord WHERE fk_courseID = $courseID";
                                         $resultz = mysqli_query($connection, $sqlz);
                                         ?>
                                         <?php
@@ -120,7 +122,7 @@
                         <h4>Special Courses You can Enroll</h4>
                         <hr style="border-width: 1px; border-color: black;">
                         <div class="course-container-main-box-act">
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Web Development</div>
                                         <h5 class="open-sans-regular">Learn HTML</h5>
@@ -128,6 +130,7 @@
                                         <div class="course-container-footer open-sans-bold"><i class="fa-solid fa-chart-simple"></i> <u>view course</u></div>
                                     </div>
                                 </div>
+
                                 <div class="course-container-act">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Machine Learning</div>
@@ -164,7 +167,7 @@
                                 <div class="course-container-act">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Web Development</div>
-                                        <h5 class="open-sans-regular">Frontend Development with HTML, CSS, and JavaScript</h5>
+                                        <h5 class="open-sans-regular" >Frontend Development with HTML, CSS, and JavaScript</h5>
                                         <span class="open-sans-regular">Learn the building blocks of web development, including HTML for structure, CSS for styling, and JavaScript for interactivity.</span>
                                         <div class="course-container-footer open-sans-bold"><i class="fa-solid fa-chart-simple"></i> <u>view course</u></div>
                                     </div>
@@ -223,8 +226,12 @@
                                     </div>
                                 </div>
 
-
+                        
                         </div>
+                        <form id="addSpecialCourseForm" method="POST">
+                            <input type="hidden" id="specialCourseName" name="specialCourseName">
+                            <input type="hidden" id="specialCourseDescp" name="specialCourseDescp">
+                        </form>
                     </div>
                     
                         </div>
@@ -233,7 +240,7 @@
                 <div id="activitiesPage" class="page" style="display: none;">
                     Activities Page Content
                 </div>
-
+                <?php if ($userType == "teacher") { ?>
                 <div id="assignActivitiesPage" class="page" style="display: none;">
                     <div class="whitebg">
                          <?php
@@ -261,7 +268,18 @@
                                         </div>
                                         <div style="margin-left:7%">
                                         <label class="label-login">Course</label><br>
-                                        <input type="text" class="textbox-form" name=""><br>
+                                        <select class="textbox-form" name="course" required>
+                                            <?php
+                                               
+                                               $courseQuery = "SELECT *, courseName FROM tblcourse WHERE courseID IN (SELECT courseID FROM tblcourseteacher WHERE fk_teacherID = (SELECT teacherID FROM tblteacherrecord WHERE acctid_fk_teacherrecord = $userId))";
+
+                                                $courseResult = mysqli_query($connection, $courseQuery);
+                                                // Populate dropdown options with courses
+                                                while ($courseRow = mysqli_fetch_assoc($courseResult)) {
+                                                    echo "<option value='" . $courseRow['courseID'] . "'>" . $courseRow['courseName'] . "</option>";
+                                                }
+                                            ?>
+                                        </select><br>
                                         </div>
                                         
                                     </div>
@@ -273,6 +291,7 @@
                         </div>
                     </div>
                 </div>
+                <?php } ?> 
 
                 <div id="workspacesPage" class="page" style="display: none;">
                     <h4 style="font-weight:700;">My Workspaces</h4>
@@ -310,13 +329,16 @@
 
 <?php
 if (isset($_POST['assignAct'])) {
-  //for tbluserprofile
+  //for tblactivityrecord
+
+  $teacherIDact = $_SESSION['teacherID'];
   $Aname = $_POST['actName'];
   $Ddate = $_POST['dueDate'];
 
   $Ades = $_POST['actDes'];
+  $courseID = $_POST['course'];
 
-  $sqlAct = "Insert into tblactivityrecord(activityname,activitydescription,duedate) values('" . $Aname . "','" . $Ades . "','" . $Ddate . "')";
+  $sqlAct = "Insert into tblactivityrecord(activityname,activitydescription,duedate,fk_courseID,fk_teacherID) values('" . $Aname . "','" . $Ades . "','" . $Ddate . "','" . $courseID . "' ,'" . $teacherIDact . "')";
 
   mysqli_query($connection, $sqlAct);
 
@@ -350,7 +372,7 @@ if (isset($_POST['addCourse'])) {
          $query2 = "SELECT teacherID FROM tblteacherrecord WHERE acctid_fk_teacherrecord = $userId";
          $result2 = mysqli_query($connection, $query2);
          $row2 = mysqli_fetch_assoc($result2);
-         $studID = $row2['teacherID'];
+         $teachID = $row2['teacherID'];
  
          //retrieve the created courseID
          $query3 = "SELECT courseID FROM tblcourse WHERE courseName = '$CourseName'";
@@ -358,7 +380,8 @@ if (isset($_POST['addCourse'])) {
          $row3 = mysqli_fetch_assoc($result3);
          $courseID = $row3['courseID'];
  
-         $sqlcourseTeacher = "INSERT INTO tblcourseteacher(courseID, teacherID) VALUES ('$courseID', '$studID')";
+         //insert to tblcourseteacher
+         $sqlcourseTeacher = "INSERT INTO tblcourseteacher(fk_teacherID, fk_courseID) VALUES ('$teachID', '$courseID')";
          mysqli_query($connection, $sqlcourseTeacher);
          }
    
@@ -366,6 +389,22 @@ if (isset($_POST['addCourse'])) {
                            alert('New Course Created.');
                      </script>";
  }
-
-
 ?>
+
+<?php
+if (isset($_POST['specialCourseName']) && isset($_POST['specialCourseDescp'])) {
+    $specialCourseName = $_POST['specialCourseName'];
+    $specialCourseDescp = $_POST['specialCourseDescp'];
+
+    // Insert special course into tblcourse
+    $sqlInsertSpecialCourse = "INSERT INTO tblcourse(courseName, courseDescription) VALUES ('$specialCourseName', '$specialCourseDescp')";
+
+    // Execute the SQL query
+    if (mysqli_query($connection, $sqlInsertSpecialCourse)) {
+        echo 'Special course added successfully!';
+    } else {
+        echo 'Error: Unable to add special course.';
+    }
+}
+?>
+
