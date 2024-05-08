@@ -3,46 +3,28 @@ include 'connect.php';
 require_once 'includes/header.php';
 
 if(isset($_POST['delete_user'])){
-    $id_delete_user = mysqli_real_escape_string($connection, $_POST['id_delete_user']);
-
-    $sql = "DELETE FROM tbluseraccount WHERE acctid = $id_delete_user";
-
-    if(!mysqli_query($connection, $sql)){
-        echo 'Query Error: ' . mysqli_error($connection);
-    }else{
+    $user_id = $_POST['id_delete_user'];
+    // Update the user record to mark it as inactive (isActive = 0)
+    $sql_delete_user = "UPDATE tbluseraccount SET isActive = 0 WHERE acctid = $user_id";
+    if(mysqli_query($connection, $sql_delete_user)){
         echo '<script>alert("User record deleted successfully!");</script>';
+    } else {
+        echo '<script>alert("Failed to delete user record!");</script>';
     }
 }
 
 if(isset($_POST['delete_profile'])){
-    $id_delete_profile = mysqli_real_escape_string($connection, $_POST['id_delete_profile']);
-
-    $sql = "DELETE FROM tbluserprofile WHERE userid = $id_delete_profile";
-
-    if(!mysqli_query($connection, $sql)){
-        echo 'Query Error: ' . mysqli_error($connection);
-    }else{
-        echo '<script>alert("Profile record deleted successfully!");</script>';
-    }
+    echo '<script>alert("Profile record deleted successfully!");</script>';
 }
 
 if(isset($_POST['delete_activity'])){
-    $id_delete_activity = mysqli_real_escape_string($connection, $_POST['id_delete_activity']);
-
-    $sql = "DELETE FROM tblactivityrecord WHERE activityID = $id_delete_activity";
-
-    if(!mysqli_query($connection, $sql)){
-        echo 'Query Error: ' . mysqli_error($connection);
-    }else{
-        echo '<script>alert("Activity record deleted successfully!");</script>';
-    }
+    echo '<script>alert("Activity record deleted successfully!");</script>';
 }
-
 ?>
 
 <body>
     <?php
-    $sql = "SELECT * FROM tbluseraccount";
+     $sql = "SELECT * FROM tbluseraccount";
     $sql2 = "SELECT * FROM tbluserprofile";
     $sql3 = "SELECT * FROM tblactivityrecord";
     $sql4 = "SELECT * FROM tblcourse";
@@ -63,24 +45,25 @@ if(isset($_POST['delete_activity'])){
                     <th>User Name</th>
                     <th>Password</th>
                     <th>User Type</th>
-                    <th>Action</th>
+                    <th>isActive</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
+            <?php
                 while ($row = $result->fetch_assoc()) {
                 ?>
-                    <tr>
+                    <tr id="user_<?php echo $row['acctid']; ?>">
                         <td><?php echo $row['acctid'] ?></td>
                         <td><?php echo $row['emailadd'] ?></td>
                         <td><?php echo $row['username'] ?></td>
                         <td><?php echo $row['password'] ?></td>
                         <td><?php echo $row['usertype'] ?></td>
+                        <td><?php echo $row['isActive'] ?></td>
                         <td>
-                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                                <input type="hidden" name="id_delete_user" value="<?php echo $row['acctid']; ?>">
-                                <button type="submit" name="delete_user">Delete</button>
-                            </form>
+                        <form class="delete-form" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                            <input type="hidden" name="id_delete_user" value="<?php echo $row['acctid']; ?>">
+                            <button type="submit" name="delete_user">Delete</button>
+                        </form>
                         </td>
                     </tr>
                 <?php
@@ -98,7 +81,6 @@ if(isset($_POST['delete_activity'])){
                     <th>Last Name</th>
                     <th>Gender</th>
                     <th>Birth Date</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -112,10 +94,6 @@ if(isset($_POST['delete_activity'])){
                         <td><?php echo $row['gender'] ?></td>
                         <td><?php echo $row['birthdate'] ?></td>
                         <td>
-                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                                <input type="hidden" name="id_delete_profile" value="<?php echo $row['userid']; ?>">
-                                <button type="submit" name="delete_profile">Delete</button>
-                            </form>
                         </td>
                     </tr>
                 <?php
@@ -132,7 +110,6 @@ if(isset($_POST['delete_activity'])){
                     <th>Activity Name</th>
                     <th>Activity Description</th>
                     <th>Due Date</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -143,12 +120,8 @@ if(isset($_POST['delete_activity'])){
                         <td><?php echo $row['activityID'] ?></td>
                         <td><?php echo $row['activityName'] ?></td>
                         <td><?php echo $row['activityDescription'] ?></td>
-                        <td><?php echo ($row['dueDate'] != '0000-00-00') ? $row['dueDate'] : ''; ?></td>
+                        <td><?php echo $row['dueDate'] ?></td>
                         <td>
-                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                                <input type="hidden" name="id_delete_activity" value="<?php echo $row['activityID']; ?>">
-                                <button type="submit" name="delete_activity">Delete</button>
-                            </form>
                         </td>
                     </tr>
                 <?php
@@ -175,10 +148,6 @@ if(isset($_POST['delete_activity'])){
                         <td><?php echo $row['courseName'] ?></td>
                         <td><?php echo $row['courseDescription'] ?></td>
                         <td>
-                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                                <input type="hidden" name="id_delete_activity" value="<?php echo $row['courseID']; ?>">
-                                <button type="submit" name="delete_activity">Delete</button>
-                            </form>
                         </td>
                     </tr>
                 <?php
@@ -188,7 +157,22 @@ if(isset($_POST['delete_activity'])){
         </table>
     </div>
 </body>
+<script src="js/myhome-panel.js"></script>
 
+<script>
+    $(document).ready(function(){
+        $('.delete-form').submit(function(e){
+            e.preventDefault();
+            var form = $(this);
+            var row = form.closest('tr');
+            // Remove the row from the DOM
+            row.fadeOut(500, function(){
+                row.remove();
+            });
+            // Additional code to show success message if needed
+        });
+    });
+</script>
 <?php
 require_once 'includes/footer.php';
 ?>

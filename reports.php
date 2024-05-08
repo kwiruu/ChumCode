@@ -259,7 +259,7 @@ $chart_data = [$total_students, $total_teachers, $total_bscs_students, $total_bs
             data: {
                 labels: <?php echo json_encode($chart_labels); ?>,
                 datasets: [{
-                    label: 'Statistics',
+                    label: 'Average',
                     data: <?php echo json_encode($chart_data); ?>,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
