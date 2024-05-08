@@ -60,6 +60,18 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+//Add Special course to the student
+function addSpecialCourse(element) {
+    var courseName = element.querySelector('h5').innerText;
+    var courseDescription = element.querySelector('span').innerText;
+
+    // Populate form fields
+    document.getElementById('specialCourseName').value = courseName;
+    document.getElementById('specialCourseDescp').value = courseDescription;
+
+    // Submit form
+    document.getElementById('addSpecialCourseForm').submit();
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   // Get references to buttons and pages
@@ -92,4 +104,13 @@ document.addEventListener("DOMContentLoaded", function() {
       toggleButton(this);
   });
 });
+
+//This is for the enroll student modal 
+function openEnrollStudentPopup() {
+  document.getElementById('enrollStudentModal').style.display = "block";
+}
+function closeEnrollStudentPopup() {
+  document.getElementById('enrollStudentModal').style.display = "none";
+}
+
 

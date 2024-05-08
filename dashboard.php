@@ -55,7 +55,7 @@ if(isset($_POST['delete_activity'])){
 
     <div class="first-page-dashboard">
         <h3>tbluseraccount</h3>
-        <table id="tbluseraccount" class="table">
+        <table class="table table-dark">
             <thead>
                 <tr>
                     <th>Seq Number</th>
@@ -90,7 +90,7 @@ if(isset($_POST['delete_activity'])){
         </table>
 
         <h3>tbluserprofile</h3>
-        <table id="tbluserprofile" class="table">
+        <table class="table table-dark">
             <thead>
                 <tr>
                     <th>Seq Number</th>
@@ -125,7 +125,7 @@ if(isset($_POST['delete_activity'])){
         </table>
 
         <h3>tblactivityrecord</h3>
-        <table id="tblactivityrecord" class="table">
+        <table class="table table-dark">
             <thead>
                 <tr>
                     <th>Seq Number</th>
@@ -143,7 +143,7 @@ if(isset($_POST['delete_activity'])){
                         <td><?php echo $row['activityID'] ?></td>
                         <td><?php echo $row['activityName'] ?></td>
                         <td><?php echo $row['activityDescription'] ?></td>
-                        <td><?php echo $row['dueDate'] ?></td>
+                        <td><?php echo ($row['dueDate'] != '0000-00-00') ? $row['dueDate'] : ''; ?></td>
                         <td>
                             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <input type="hidden" name="id_delete_activity" value="<?php echo $row['activityID']; ?>">
@@ -158,7 +158,7 @@ if(isset($_POST['delete_activity'])){
         </table>
 
         <h3>tblcourse</h3>
-        <table id="tblactivityrecord" class="table">
+        <table class="table table-dark">
             <thead>
                 <tr>
                     <th>Seq Number</th>

@@ -16,7 +16,9 @@
         <div class="dashboard-holder">
             <div class="dashboard-left-panel">
                 <button id="courseButton" class="toggle-button active"><i class="fa-regular fa-bookmark" style="margin-right:5%;"></i> Course</button>
+                <?php if ($userType == "student") { ?>
                 <button id="activitiesButton" class="toggle-button"><i class="fa-regular fa-folder-open" style="margin-right:5%;"></i> Activities</button>
+                <?php } ?> 
                 <?php if ($userType == "teacher") { ?>
                 <button id="assignactivitiesButton" class="toggle-button"><i class="fa-regular fa-pen-to-square" style="margin-right:5%;"></i> Assign Activities</button>
                 <?php } ?>                
@@ -28,8 +30,9 @@
                         <div style="display:flex; justify-content:space-between; width:100%;">
                             <h4>Courses</h4>
                             <?php if ($userType == "teacher") { ?>
-                        <button type="button" class="addCourse-button" onclick="openAddActivityPopup()"> Add Course <i class="fa-solid fa-plus"></i></button><br>
-                    <?php } ?>
+                                <button type="button" class="addCourse-button" onclick="openAddActivityPopup()"> Add Course <i class="fa-solid fa-plus"></i></button><br>
+                                <button type="button" class="enrollStudent-button" onclick="openEnrollStudentPopup()"> Enroll Student <i class="fa-solid fa-plus"></i></button><br>
+                            <?php } ?>
                         </div>  
                     <hr style="border-width: 1px; border-color: black;">
                     <!--show add button if teacher ang user -->
@@ -45,6 +48,38 @@
                                 <label for="activityDescription">Course Description:</label><br>
                                 <textarea id="activityDescription" name="courseDescription" required></textarea><br>
                                 <button type="submit" class="addCourse-button" name="addCourse" value="addCourse">Add Course</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="enrollStudentModal" class="modal">
+                        <div class="modal-content">
+                            <div class="box-for-close"><button class="close" onclick="closeEnrollStudentPopup()">&times;</button></div>
+                            <h2>Enroll Student</h2>
+                            <form id="enrollStudentForm" method="POST">
+                                <label for="studentList">Select Student:</label><br>
+                                <select id="studentList" name="studentIDEnroll">
+                                    <?php 
+                                        $studentQuery = "SELECT * FROM tbluseraccount WHERE usertype = 'student'";
+                                        $studentResult = mysqli_query($connection, $studentQuery);
+                                        while ($studentRow = mysqli_fetch_assoc($studentResult)) {
+                                            //list of students
+                                            echo "<option value='" . $studentRow['acctid'] . "'>" . $studentRow['username'] . "</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <select class="textbox-form" name="courseEnroll" required>
+                                    <?php
+                                        $courseQuery = "SELECT *, courseName FROM tblcourse WHERE courseID IN (SELECT courseID FROM tblcourseteacher WHERE fk_teacherID = (SELECT teacherID FROM tblteacherrecord WHERE acctid_fk_teacherrecord = $userId))";
+                                        $courseResult = mysqli_query($connection, $courseQuery);
+                                        //list of course under the teacher
+                                        while ($courseRow = mysqli_fetch_assoc($courseResult)) {
+                                            echo "<option value='" . $courseRow['courseID'] . "'>" . $courseRow['courseName'] . "</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <br>
+                                <button type="submit" class="enrollStudent-button" name="enrollStudent" value="enrollStudent">Enroll Student</button>
                             </form>
                         </div>
                     </div>
@@ -72,7 +107,8 @@
                                         <div class="course-drop-down-left">
                                             <div style="padding:3% 3%; height:100px">
                                                 <p class="space-mono-thin" style="color: black; margin-bottom:5px"><?php echo $row['courseName'] ?></p>
-                                                <h2 class="open-sans-bold" style="color: black; font-size:22px"><?php echo $row['courseDescription'] ?></h2>
+                                                <h2 class="open-sans-bold" style="color: black; font-size: 22px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; "><?php echo $row['courseDescription'] ?></h2>
+
                                             </div>
                                         </div>
                                         <div class="course-drop-down-right">
@@ -84,23 +120,27 @@
                                         <div><h6 style="font-weight:700;" class="space-mono-thin">Course</h6></div>
                                         <!-- Content associated with each course -->
                                         <?php
-                                        $sqlz = "SELECT * FROM tblactivityrecord WHERE fk_courseID = $courseID";
-                                        $resultz = mysqli_query($connection, $sqlz);
-                                        ?>
-                                        <?php
-                                        while ($rowzz = $resultz->fetch_assoc()) {
-                                        ?>      
-                                                    <div class="activity-hover" style="display:flex; margin:1% 2%; padding:1%;font-size:14px">
-                                                        <div style="margin:0%;font-weight:500;width:15%" >
-                                                            Activity
-                                                        </div>
-                                                        <div style="width:85%; font-weight:400" class="limited-characters">
-                                                        <?php echo $rowzz['activityName'] ?>
-                                                        </div>
+                                            $sqlz = "SELECT * FROM tblactivityrecord WHERE fk_courseID = $courseID";
+                                            $resultz = mysqli_query($connection, $sqlz);
+
+                                            if(mysqli_num_rows($resultz) > 0) {
+                                                while ($rowzz = $resultz->fetch_assoc()) {
+                                            ?>      
+                                                <div class="activity-hover" style="display:flex; margin:1% 2%; padding:1%;font-size:14px">
+                                                    <div style="margin:0%;font-weight:500;width:15%" >
+                                                        Activity
                                                     </div>
-                                        <?php
-                                        }
-                                        ?>
+                                                    <div style="width:85%; font-weight:400" class="limited-characters">
+                                                        <?php echo $rowzz['activityName'] ?>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                                }
+                                            } else {
+                                                // If wala pa activities this will display
+                                                echo "<p>No activities found for this course.</p>";
+                                            }
+                                            ?>
                                         
                                         </div>
                                     </div>
@@ -237,9 +277,72 @@
                         </div>
                 </div>
 
+                <?php if ($userType == "student") { ?>
                 <div id="activitiesPage" class="page" style="display: none;">
-                    Activities Page Content
+                    <div class="activitiesPage-box">
+                        <div style="border-bottom:1px solid black; width:100%;">
+                            <button class="tab-button-act active">In progress</button>
+                            <button class="tab-button-act">Completed</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="page1">
+                            <div class="second-page-main-page">
+
+                                <p class="space-mono-thin" style="color: black">In progress</p>
+
+                                <div class="course-container-main-box-act">
+                                    <?php
+                                    while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                        <div class="course-container-act">
+
+                                            <div class="course-box-2">
+                                                <div class="course-box-top-box-2 space-mono-thin"><?php echo $row['activityID'] ?></div>
+                                                <h5 class="open-sans-regular"><?php echo $row['activityName'] ?></h3>
+                                                <span class="open-sans-regular"><?php echo $row['activityDescription'] ?></span>
+                                                <div class="course-container-footer open-sans-bold"><?php echo $row['dueDate'] ?></div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="page2" style="display:none;">
+                            <div class="second-page-main-page">
+
+                                <p class="space-mono-thin" style="color: black">Completed</p>
+
+                                <div class="course-container-main-box-act">
+                                    <?php
+                                    while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                    <div class="course-container-act">
+
+                                        <div class="course-box-2">
+                                        <div class="course-box-top-box-2 space-mono-thin"><?php echo $row['activityID'] ?></div>
+                                        <h5 class="open-sans-regular"><?php echo $row['activityName'] ?></h3>
+                                            <span class="open-sans-regular"><?php echo $row['activityDescription'] ?></span>
+                                            <div class="course-container-footer open-sans-bold"><?php echo $row['dueDate'] ?></div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <?php } ?> 
+
+
                 <?php if ($userType == "teacher") { ?>
                 <div id="assignActivitiesPage" class="page" style="display: none;">
                     <div class="whitebg">
@@ -329,16 +432,20 @@
 
 <?php
 if (isset($_POST['assignAct'])) {
+
+    $query2 = "SELECT teacherID FROM tblteacherrecord WHERE acctid_fk_teacherrecord = $userId";
+    $result2 = mysqli_query($connection, $query2);
+    $row2 = mysqli_fetch_assoc($result2);
+    $teachID = $row2['teacherID'];
   //for tblactivityrecord
 
-  $teacherIDact = $_SESSION['teacherID'];
   $Aname = $_POST['actName'];
   $Ddate = $_POST['dueDate'];
 
   $Ades = $_POST['actDes'];
   $courseID = $_POST['course'];
 
-  $sqlAct = "Insert into tblactivityrecord(activityname,activitydescription,duedate,fk_courseID,fk_teacherID) values('" . $Aname . "','" . $Ades . "','" . $Ddate . "','" . $courseID . "' ,'" . $teacherIDact . "')";
+  $sqlAct = "Insert into tblactivityrecord(activityname,activitydescription,duedate,fk_courseID,fk_teacherID) values('" . $Aname . "','" . $Ades . "','" . $Ddate . "','" . $courseID . "' ,'" . $teachID . "')";
 
   mysqli_query($connection, $sqlAct);
 
@@ -404,6 +511,26 @@ if (isset($_POST['specialCourseName']) && isset($_POST['specialCourseDescp'])) {
         echo 'Special course added successfully!';
     } else {
         echo 'Error: Unable to add special course.';
+    }
+}
+
+if (isset($_POST['enrollStudent'])) {
+    if (!$connection) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $studeEnroll = $_POST['studentIDEnroll'];
+    $courseEnroll = $_POST['courseEnroll'];
+
+    // SQL query to insert data to tblcoursestudent
+    $sqlAct2 = "INSERT INTO tblcoursestudent (courseID, studentID) VALUES ('$courseEnroll', '$studeEnroll')";
+
+    if (mysqli_query($connection, $sqlAct2)) {
+        echo "<script language='javascript'>
+            alert('New Activity Created.');
+        </script>";
+    } else {
+        echo "Error: " . $sqlAct2 . "<br>" . mysqli_error($connection);
     }
 }
 ?>
