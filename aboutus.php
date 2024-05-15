@@ -15,7 +15,7 @@
                 
             </div>
         </div>
-        <div style="padding:5%; display:flex; justify-content: space-between;">
+        <div style="padding:5%; display:flex; justify-content: space-between;background-color:#10162f; color:white">
             <div style="width:48%">
                 <h3 class="open-sans-bold" style="margin-bottom: 3%"> Our History</h3>
                 <p style="font-size:17px">When we started ChumCode, our goal was to give anyone in the world the ability to learn the skills they’d need to succeed in the 21st century. We set out to create a new, interactive way of learning — making it engaging, flexible, and accessible for as many people as possible. Since then, we have helped millions of people worldwide unlock modern technical skills and reach their full potential through code. ✨</p>
