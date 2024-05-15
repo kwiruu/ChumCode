@@ -29,13 +29,9 @@
       <a href="">Problems</a>
       <a href="dashboard.php">Dashboard</a>
       <a href="reports.php">Reports</a>
-      <?php
-        if (isset($_SESSION['username'])) {
-            echo' <a href="activity.php">Activity</a>';
-        }
-      ?>
     </div>  
-    <div style="padding-top:10px">
+    <div style="padding-top:5px">
+    <a href="aboutus.php">About us</a>
       <i class="fa-solid fa-magnifying-glass left"></i>
       <?php
         $con = mysqli_connect("localhost", "root", "", "dbcabilif1") or die("Error in connection");

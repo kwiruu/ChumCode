@@ -78,7 +78,7 @@ $row_activity_stats = mysqli_fetch_assoc($result_activity_stats);
 $total_activities = $row_activity_stats['total_activities'];
 $avg_deadline_days = $row_activity_stats['avg_deadline_days'];
 
-$chart_labels = ["Total Students", "Total Teachers", "Total BSCS Students", "Total BSIT Students", "Total Activities"];
+$chart_labels = ["Total Students", "Total Teachers", "Total BSCS Users", "Total BSIT Users", "Total Activities"];
 $chart_data = [$total_students, $total_teachers, $total_bscs_students, $total_bsit_students, $total_activities];
 
 ?>
@@ -177,7 +177,7 @@ $chart_data = [$total_students, $total_teachers, $total_bscs_students, $total_bs
             <thead>
                 <tr>
                     <th>Total Students</th>
-                    <th>Average Students (%)</th>
+                    <th>Average Students in Users(%)</th>
                 </tr>
             </thead>
             <tbody>
@@ -191,7 +191,7 @@ $chart_data = [$total_students, $total_teachers, $total_bscs_students, $total_bs
             <thead>
                 <tr>
                     <th>Total Teachers</th>
-                    <th>Average Teachers (%)</th>
+                    <th>Average Teachers in Users(%)</th>
                 </tr>
             </thead>
             <tbody>

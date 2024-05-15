@@ -944,14 +944,27 @@ cursor: pointer;
 
 .addCourse-button{
   background-color: #fff0e5;
+  width: 200px;
   color: #3a10e5;
   font-weight: 600;
   outline:none;
   border: none;
-  margin-left: 70%;
 }
 
 .addCourse-button:focus{
+  border:0px;
+  outline:none;
+}
+
+.enrollStudent-button{
+  background-color: #fff0e5;
+  color: #3a10e5;
+  font-weight: 600;
+  outline:none;
+  border: none;
+}
+
+.enrollStudent-button:focus{
   border:0px;
   outline:none;
 }
@@ -1356,4 +1369,26 @@ font-family: "Open Sans", sans-serif;
     font-weight: 600;
     box-shadow: none;
     margin-bottom: 0px;
+  }
+
+  /* ===================--------------------================== */
+  /*                        About us Page                      */
+  /* ===================--------------------================== */
+
+
+  .about-us-first-page{
+    width: 90%;
+    margin: auto;
+    height: max-content;
+  }
+
+  .button-open{
+    border-radius: 5px;
+  width: 50%;
+  height: 40px;
+  margin: auto 0;
+  background-color: #3a10e5;
+  border: none;
+  font-size: 14px;
+  color:white;
   }

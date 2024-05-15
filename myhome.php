@@ -29,12 +29,15 @@
                     <div>
                         <div style="display:flex; justify-content:space-between; width:100%;">
                             <h4>Courses</h4>
-                            <?php if ($userType == "teacher") { ?>
-                                <button type="button" class="addCourse-button" onclick="openAddActivityPopup()"> Add Course <i class="fa-solid fa-plus"></i></button><br>
-                                <button type="button" class="enrollStudent-button" onclick="openEnrollStudentPopup()"> Enroll Student <i class="fa-solid fa-plus"></i></button><br>
-                            <?php } ?>
+                            <div style="display:flex">
+                                <?php if ($userType == "teacher") { ?>
+                                    <button type="button" class="addCourse-button" onclick="openAddActivityPopup()"> Add Course <i class="fa-solid fa-plus"></i></button><br>
+                                    <button type="button" class="enrollStudent-button" onclick="openEnrollStudentPopup()"> Enroll Student <i class="fa-solid fa-plus"></i></button><br>
+                                <?php } ?>
+                            </div>
                         </div>  
                     <hr style="border-width: 1px; border-color: black;">
+                    
                     <!--show add button if teacher ang user -->
                     
                     <div id="addActivityModal" class="modal">
@@ -61,6 +64,7 @@
                                 <select id="studentList" name="studentIDEnroll">
                                     <?php 
                                         $studentQuery = "SELECT * FROM tbluseraccount WHERE usertype = 'student'";
+                                        
                                         $studentResult = mysqli_query($connection, $studentQuery);
                                         while ($studentRow = mysqli_fetch_assoc($studentResult)) {
                                             //list of students
@@ -107,8 +111,7 @@
                                         <div class="course-drop-down-left">
                                             <div style="padding:3% 3%; height:100px">
                                                 <p class="space-mono-thin" style="color: black; margin-bottom:5px"><?php echo $row['courseName'] ?></p>
-                                                <h2 class="open-sans-bold" style="color: black; font-size: 22px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; "><?php echo $row['courseDescription'] ?></h2>
-
+                                                <h2 class="open-sans-bold" style="color: black; font-size:22px"><?php echo $row['courseDescription'] ?></h2>
                                             </div>
                                         </div>
                                         <div class="course-drop-down-right">
@@ -171,7 +174,7 @@
                                     </div>
                                 </div>
 
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Machine Learning</div>
                                         <h5 class="open-sans-regular">Learn Python</h5>
@@ -179,7 +182,8 @@
                                         <div class="course-container-footer open-sans-bold"><i class="fa-solid fa-chart-simple"></i> <u>view course</u></div>
                                     </div>
                                 </div>
-                                <div class="course-container-act">
+
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Web Development</div>
                                         <h5 class="open-sans-regular">Learn JavaScript</h5>
@@ -187,7 +191,7 @@
                                         <div class="course-container-footer open-sans-bold"><i class="fa-solid fa-chart-simple"></i> <u>view course</u></div>
                                     </div>
                                 </div>
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Data Analysis</div>
                                         <h5 class="open-sans-regular">Learn MySQL</h5>
@@ -195,7 +199,7 @@
                                         <div class="course-container-footer open-sans-bold"><i class="fa-solid fa-chart-simple"></i> <u>view course</u></div>
                                     </div>
                                 </div>
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Machine Learning Basics</div>
                                         <h5 class="open-sans-regular">Introduction to Machine Learning</h5>
@@ -204,7 +208,7 @@
                                     </div>
                                 </div>
 
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Web Development</div>
                                         <h5 class="open-sans-regular" >Frontend Development with HTML, CSS, and JavaScript</h5>
@@ -213,7 +217,7 @@
                                     </div>
                                 </div>
 
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Cybersecurity</div>
                                         <h5 class="open-sans-regular">Ethical Hacking and Penetration Testing</h5>
@@ -221,7 +225,7 @@
                                         <div class="course-container-footer open-sans-bold"><i class="fa-solid fa-chart-simple"></i> <u>view course</u></div>
                                     </div>
                                 </div>
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Python Programming</div>
                                         <h5 class="open-sans-regular">Master Python Basics</h5>
@@ -230,7 +234,7 @@
                                     </div>
                                 </div>
 
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Artificial Intelligence</div>
                                         <h5 class="open-sans-regular">Introduction to AI and Neural Networks</h5>
@@ -239,7 +243,7 @@
                                     </div>
                                 </div>
 
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Mobile App Development</div>
                                         <h5 class="open-sans-regular">Building iOS Apps with Swift</h5>
@@ -248,7 +252,7 @@
                                     </div>
                                 </div>
 
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Data Science</div>
                                         <h5 class="open-sans-regular">Data Visualization with Python</h5>
@@ -257,7 +261,7 @@
                                     </div>
                                 </div>
 
-                                <div class="course-container-act">
+                                <div class="course-container-act" onclick="addSpecialCourse(this)">
                                     <div class="course-box-2">
                                         <div class="course-box-top-box-2 space-mono-thin">Blockchain Technology</div>
                                         <h5 class="open-sans-regular">Understanding Cryptocurrencies and Blockchain</h5>
@@ -500,38 +504,77 @@ if (isset($_POST['addCourse'])) {
 
 <?php
 if (isset($_POST['specialCourseName']) && isset($_POST['specialCourseDescp'])) {
+    
     $specialCourseName = $_POST['specialCourseName'];
     $specialCourseDescp = $_POST['specialCourseDescp'];
 
-    // Insert special course into tblcourse
     $sqlInsertSpecialCourse = "INSERT INTO tblcourse(courseName, courseDescription) VALUES ('$specialCourseName', '$specialCourseDescp')";
 
-    // Execute the SQL query
-    if (mysqli_query($connection, $sqlInsertSpecialCourse)) {
-        echo 'Special course added successfully!';
+    mysqli_query($connection, $sqlInsertSpecialCourse);
+
+
+    $newCourseIDQuery = "SELECT courseID FROM tblcourse WHERE courseName = '$specialCourseName'";
+    $newCourseIDResult = mysqli_query($connection, $newCourseIDQuery);
+
+    
+    $newCourseIDRow = mysqli_fetch_assoc($newCourseIDResult);
+    $newCourseID = $newCourseIDRow['courseID'];
+
+    $stud_userId = $_SESSION['acctid'];
+
+    $studAccQuery = "SELECT studentID FROM tblstudentrecord WHERE acctid_fk_studentrecord = $stud_userId";
+    $studAccResult = mysqli_query($connection, $studAccQuery);
+
+    if ($studAccResult) {
+        $studAccRow = mysqli_fetch_assoc($studAccResult);
+        $studID = $studAccRow['studentID'];
+            echo "<script language='javascript'>
+                        alert('Successfully Enrolled.');
+                    </script>";
     } else {
-        echo 'Error: Unable to add special course.';
+        echo "<script language='javascript'>
+                    alert('Enrollment Unsuccessful.');
+                </script>";
+        exit; 
+    }
+
+  
+    $querycourse = "INSERT INTO tblcoursestudent(courseID, studentID) VALUES ('$newCourseID', '$studID')";
+
+    if (mysqli_query($connection, $querycourse)) {
+        echo "<script language='javascript'>
+                alert('Successfully Enrolled.');
+            </script>";
+    } else {
+        echo 'Error: Unable to enroll in the new course. ' . mysqli_error($connection);
     }
 }
 
-if (isset($_POST['enrollStudent'])) {
-    if (!$connection) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
 
+if (isset($_POST['enrollStudent'])) {
     $studeEnroll = $_POST['studentIDEnroll'];
     $courseEnroll = $_POST['courseEnroll'];
 
-    // SQL query to insert data to tblcoursestudent
-    $sqlAct2 = "INSERT INTO tblcoursestudent (courseID, studentID) VALUES ('$courseEnroll', '$studeEnroll')";
+    $studentActIDQuery = "SELECT studentID FROM tblstudentrecord WHERE acctid_fk_studentrecord  = $studeEnroll";
+    $studentActIDResult = mysqli_query($connection, $studentActIDQuery);
 
-    if (mysqli_query($connection, $sqlAct2)) {
-        echo "<script language='javascript'>
-            alert('New Activity Created.');
-        </script>";
+    if ($studentActIDResult) {
+        $studentActIDRow = mysqli_fetch_assoc($studentActIDResult);
+        $studentActID = $studentActIDRow['studentID'];
+
+        $sqlAct2 = "INSERT INTO tblcoursestudent (courseID, studentID) VALUES ('$courseEnroll', '$studentActID')";
+
+        if (mysqli_query($connection, $sqlAct2)) {
+            echo "<script language='javascript'>
+                alert('Student successfully enrolled.');
+            </script>";
+        } else {
+            echo "Error: " . $sqlAct2 . "<br>" . mysqli_error($connection);
+        }
     } else {
-        echo "Error: " . $sqlAct2 . "<br>" . mysqli_error($connection);
+        echo "Error: Could not retrieve student ID.<br>" . mysqli_error($connection);
     }
 }
+
 ?>
 
