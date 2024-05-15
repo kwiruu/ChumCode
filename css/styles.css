@@ -803,6 +803,7 @@ tbody td{
 
   .yellow-top{
     height: 8%;
+    width: 100%;
     background-color: #ffd300;
     border-bottom: 1px solid black;
     border-top-left-radius: 20px;
@@ -1391,4 +1392,10 @@ font-family: "Open Sans", sans-serif;
   border: none;
   font-size: 14px;
   color:white;
+  }
+
+  .profile_img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
   }
